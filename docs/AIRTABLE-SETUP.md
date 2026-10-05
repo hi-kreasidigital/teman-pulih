@@ -14,10 +14,11 @@ Setelah impor, ubah tipe kolom agar nyaman diedit:
 | Category (Products) | Single select: singing-bowl, engraving |
 | Description / Body / Summary | Long text |
 | Image | **Attachment** (tambahkan sendiri) |
+| Gallery | **Attachment** (Services saja; foto tambahan, tampil di halaman layanan dan bagian "Momen sesi" beranda. Kosong = pakai foto bawaan situs) |
 | Image Alt ID / Image Alt EN | Single line text (opsional, untuk SEO) |
 
 ## 2. Kolom per tabel
-- **Services**: Slug, Order, Published, Title/Summary/Description (ID & EN), Lynk URL, Icon (`leaf`, `wave`, `stone`, `bowl`), Image
+- **Services**: Slug, Order, Published, Title/Summary/Description (ID & EN), Lynk URL, Icon (`leaf`, `wave`, `stone`, `bowl`), Image, Gallery
 - **Events**: Slug, Published, Title/Description (ID & EN), Date, Time, Mode, Location, Service Slug (isi slug layanan), Registration URL (opsional; kosong = tombol WhatsApp), Image
 - **Products**: Slug, Order, Published, Category, Title/Summary/Description/Price (ID & EN), Order URL (opsional), Reference URL + Reference Label (ID & EN), Image
 - **Posts**: Slug, Slug EN (slug versi Inggris, penting untuk SEO), Published, Publish Date, Instagram URL, Tags (pisahkan koma), Title (= judul SEO), Meta Description, Excerpt, Body (Markdown) dalam ID & EN, Image
@@ -44,3 +45,7 @@ Tanpa ini, situs tetap rebuild tiap malam atau lewat tombol **Run workflow**.
 
 ## 5. Bila build gagal
 Jika token/nama kolom salah, build sengaja berhenti dan situs yang sedang live tidak berubah. Lihat log di tab Actions (pesan `[cms] ERROR`).
+
+
+## Banner beranda
+Kunci **Site Settings** `hero_kicker`, `hero_title`, `hero_byline`, `hero_subtitle` mengatur teks banner. Foto potret banner ada di `public/images/hero-fikri.jpg`; logo di `public/images/logo-*.png`.

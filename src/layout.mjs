@@ -2,12 +2,14 @@
 import { site, waLink } from '../config/site.mjs';
 import { t, routes, other } from './i18n.mjs';
 import { esc } from './lib.mjs';
-import { icons, logoMark } from './art.mjs';
+import { icons } from './art.mjs';
 
 // href internal (memperhitungkan basePath bila situs di sub-path)
 export const u = (p = '/') => site.basePath + p;
 // URL absolut untuk canonical / OG / sitemap
 export const abs = (p = '/') => site.url + p;
+
+const logoImg = () => `<img class="logo-mark" src="${u('/images/logo-mark.png')}" alt="" width="44" height="44">`;
 
 const navKeys = ['home', 'about', 'services', 'events', 'products', 'blog'];
 
@@ -22,7 +24,7 @@ function navHtml(lang, current) {
 }
 
 export function layout(ctx) {
-  const { lang, path, alt = {}, title, description, body, jsonld = [], ogImage, ogType = 'website', noindex = false, section = '', cssHref } = ctx;
+  const { lang, path, alt = {}, title, description, body, jsonld = [], ogImage, ogType = 'website', noindex = false, section = '', cssHref, preload = '' } = ctx;
   const T = t[lang];
   const canonical = abs(path);
   const image = ogImage || abs('/images/og-default.png');
@@ -61,10 +63,12 @@ ${alt[otherLang] ? `<meta property="og:locale:alternate" content="${t[otherLang]
 <meta name="twitter:title" content="${esc(title)}">
 <meta name="twitter:description" content="${esc(description)}">
 <meta name="twitter:image" content="${esc(absImage)}">
-<link rel="icon" href="${u('/favicon.svg')}" type="image/svg+xml">
+<link rel="icon" href="${u('/favicon.png')}" type="image/png" sizes="64x64">
+<link rel="apple-touch-icon" href="${u('/apple-touch-icon.png')}">
+${preload}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Marcellus&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Marcellus&family=Bree+Serif&display=swap">
 <link rel="stylesheet" href="${cssHref}">
 ${ld}
 </head>
@@ -72,7 +76,7 @@ ${ld}
 <a class="skip" href="#main">${esc(T.skip)}</a>
 <header class="site-header">
   <div class="wrap header-in">
-    <a class="brand" href="${u(routes.home[lang])}" aria-label="${esc(site.name)}">${logoMark}<span>${esc(site.name)}</span></a>
+    <a class="brand" href="${u(routes.home[lang])}" aria-label="${esc(site.name)}">${logoImg()}<span>${esc(site.name)}</span></a>
     <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">${esc(T.menu)}</button>
     <nav id="site-nav" class="site-nav" aria-label="Main">
       ${navHtml(lang, section)}
@@ -92,7 +96,7 @@ ${body}
 <footer class="site-footer">
   <div class="wrap footer-grid">
     <div>
-      <a class="brand" href="${u(routes.home[lang])}">${logoMark}<span>${esc(site.name)}</span></a>
+      <a class="footer-logo" href="${u(routes.home[lang])}" aria-label="${esc(site.name)}"><img src="${u('/images/logo-full.png')}" alt="${esc(site.name)} healing space" width="150" height="150" loading="lazy"></a>
       <p class="footer-tag">${esc(T.footer.tagline)}</p>
     </div>
     <div>

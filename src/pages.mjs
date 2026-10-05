@@ -34,10 +34,13 @@ export function buildPages(cms) {
     <a class="btn btn-gold" href="${wa(lang, key)}" target="_blank" rel="noopener">${icons.whatsapp}<span>${esc(t[lang].chatWA)}</span></a></div></section>`;
 
   // ---------- komponen ----------
-  const serviceRow = (s, lang) => `<article class="svc-row">
-    <span class="svc-icon">${icons[s.icon] || icons.leaf}</span>
+  const serviceRow = (s, lang) => `<article class="svc-row${s.image ? ' has-photo' : ''}">
+    ${s.image ? `<a class="svc-thumb" href="${u(svcPath(lang, s.slug))}" tabindex="-1" aria-hidden="true"><img src="${imgUrl(s.image)}" alt="" width="360" height="270" loading="lazy" decoding="async"></a>` : `<span class="svc-icon">${icons[s.icon] || icons.leaf}</span>`}
     <div class="svc-main"><h3><a href="${u(svcPath(lang, s.slug))}">${esc(L(s.title, lang))}</a></h3><p>${esc(L(s.summary, lang))}</p></div>
     <a class="link" href="${u(svcPath(lang, s.slug))}">${esc(t[lang].detail)}<span class="sr"> ${esc(L(s.title, lang))}</span></a></article>`;
+
+  const momentTile = (m, lang) => `<figure class="moment"><a href="${u(svcPath(lang, m.svc.slug))}"><span class="moment-img"><img src="${imgUrl(m.src)}" alt="${esc(L(m.alt, lang))}" width="700" height="580" loading="lazy" decoding="async"></span>
+    <figcaption><span class="moment-cap">${esc(L(m.caption, lang))}</span><span class="moment-link">${esc(t[lang].home.viewService)}</span></figcaption></a></figure>`;
 
   const eventRow = (ev, lang, isPast = false) => {
     const T = t[lang];
@@ -84,20 +87,23 @@ export function buildPages(cms) {
     // ================= HOME =================
     {
       const nextEvents = upcoming.slice(0, 3);
+      const moments = services.flatMap((sv) => (sv.gallery || []).map((g) => ({ ...g, svc: sv })));
       const latest = posts.filter((p) => hasPost(p, lang)).slice(0, 3);
       const duo = products.slice(0, 2).map((p, i) => `<a class="prod-tile ${i === 0 ? 'tile-gold' : 'tile-turq'}" href="${u(routes.products[lang])}#${esc(p.slug)}">
           <span class="tile-icon">${icons[p.category === 'engraving' ? 'stone' : 'bowl']}</span><h3>${esc(L(p.title, lang))}</h3><p>${esc(L(p.summary, lang))}</p></a>`).join('');
       const body = `
-<section class="hero"><div class="wrap hero-grid">
-  <div class="hero-copy"><h1>${esc(S('hero_title', lang))}</h1><p class="lead">${esc(S('hero_subtitle', lang))}</p>
+<section class="banner"><div class="banner-bg" aria-hidden="true"></div>
+  <div class="banner-copy"><p class="banner-kicker">${esc(S('hero_kicker', lang))}</p><h1>${esc(S('hero_title', lang))}</h1>
+    <p class="banner-by">${esc(S('hero_byline', lang))}</p><p class="banner-lead">${esc(S('hero_subtitle', lang))}</p>
     <div class="actions"><a class="btn" href="${wa(lang, 'general')}" target="_blank" rel="noopener">${icons.whatsapp}<span>${esc(T.chatWA)}</span></a>
-    <a class="btn btn-ghost" href="${u(routes.services[lang])}">${esc(T.seeServices)}</a></div></div>
-  <div class="hero-visual">${hero}</div></div></section>
+    <a class="banner-link" href="#portofolio"><span>${esc(T.home.portfolio)}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v15M6 13l6 6 6-6"/></svg></a></div></div>
+  <div class="banner-photo"><img src="${u('/images/hero-fikri.jpg')}" alt="${esc(T.home.heroAlt)}" width="1040" height="1468" fetchpriority="high" decoding="async"></div></section>
 <section class="section"><div class="wrap split"><h2>${esc(S('intro_title', lang))}</h2>
   <div class="prose"><p>${esc(S('intro_body', lang))}</p><h3>${esc(S('audience_title', lang))}</h3><p>${esc(S('audience_body', lang))}</p>
   <p><a class="btn btn-ghost" href="${wa(lang, 'group')}" target="_blank" rel="noopener">${esc(T.askWA)}</a></p></div></div></section>
 <section class="section section-mist"><div class="wrap">${sectionHead(T.home.servicesTitle, T.home.servicesLead)}
   <div class="svc-list">${services.map((s) => serviceRow(s, lang)).join('')}</div></div></section>
+${moments.length ? `<section class="section moments" id="portofolio"><div class="wrap">${sectionHead(T.home.momentsTitle, T.home.momentsLead)}<div class="moments-grid">${moments.map((m) => momentTile(m, lang)).join('')}</div></div></section>` : ''}
 ${nextEvents.length ? `<section class="section"><div class="wrap">${sectionHead(T.home.eventsTitle, '', `<a class="link" href="${u(routes.events[lang])}">${esc(T.seeAllEvents)}</a>`)}
   <div class="event-list">${nextEvents.map((e) => eventRow(e, lang)).join('')}</div></div></section>` : ''}
 ${products.length ? `<section class="section section-mist"><div class="wrap">${sectionHead(T.home.productsTitle, T.home.productsLead, `<a class="link" href="${u(routes.products[lang])}">${esc(T.seeProducts)}</a>`)}
@@ -105,7 +111,8 @@ ${products.length ? `<section class="section section-mist"><div class="wrap">${s
 ${latest.length ? `<section class="section"><div class="wrap">${sectionHead(T.home.blogTitle, T.home.blogLead, `<a class="link" href="${u(routes.blog[lang])}">${esc(T.seeAllPosts)}</a>`)}
   <div class="post-list">${latest.map((p) => postItem(p, lang)).join('')}</div></div></section>` : ''}
 ${ctaBand(lang, T.home.ctaTitle, T.home.ctaBody)}`;
-      pages.push({ lang, path: routes.home[lang], alt: both('home'), section: 'home', title: T.home.title, description: T.home.description, body, jsonld: [orgLd(), websiteLd(lang)] });
+      pages.push({ lang, path: routes.home[lang], alt: both('home'), section: 'home', title: T.home.title, description: T.home.description, body, jsonld: [orgLd(), websiteLd(lang)],
+        preload: `<link rel="preload" as="image" href="${u('/images/hero-fikri.jpg')}" fetchpriority="high">` });
     }
 
     // ================= ABOUT =================
@@ -139,8 +146,9 @@ ${ctaBand(lang, T.home.ctaTitle, T.home.ctaBody)}`;
       const name = L(s.title, lang);
       const related = upcoming.filter((e) => e.serviceSlug === s.slug).slice(0, 3);
       const others = services.filter((x) => x.slug !== s.slug);
+      const extra = (s.gallery || []).filter((g) => g.src !== s.image);
       const path = svcPath(lang, s.slug);
-      const visual = s.image ? `<img class="detail-img" src="${imgUrl(s.image)}" alt="${esc(L(s.imageAlt, lang) || name)}" width="1200" height="800" loading="eager" decoding="async">` : '';
+      const visual = s.image ? `<img class="detail-img" src="${imgUrl(s.image)}" alt="${esc(L(s.imageAlt, lang) || name)}" width="1200" height="900" loading="eager" decoding="async">` : '';
       const body = `<div class="wrap page-top">${crumbs(lang, [{ name: T.nav.services, path: routes.services[lang] }, { name, path }])}
   <h1>${esc(name)}</h1><p class="lead">${esc(L(s.summary, lang))}</p></div>
 <section class="section-tight"><div class="wrap detail-grid">
@@ -148,6 +156,7 @@ ${ctaBand(lang, T.home.ctaTitle, T.home.ctaBody)}`;
   <aside class="book-box"><span class="svc-icon">${icons[s.icon] || icons.leaf}</span><h2>${esc(T.services.booking)}</h2><p>${esc(T.services.bookingBody)}</p>
     <div class="stack">${s.lynkUrl ? `<a class="btn" href="${esc(s.lynkUrl)}" target="_blank" rel="noopener">${esc(T.bookLynk)}</a>` : ''}
     <a class="btn btn-ghost" href="${wa(lang, 'service', name)}" target="_blank" rel="noopener">${icons.whatsapp}<span>${esc(T.askWA)}</span></a></div>${note(lang)}</aside></div></section>
+${extra.length ? `<section class="section-tight"><div class="wrap"><h2>${esc(T.services.gallery)}</h2><div class="gallery">${extra.map((g) => `<figure><img src="${imgUrl(g.src)}" alt="${esc(L(g.alt, lang))}" width="700" height="580" loading="lazy" decoding="async"><figcaption>${esc(L(g.caption, lang))}</figcaption></figure>`).join('')}</div></div></section>` : ''}
 ${related.length ? `<section class="section section-mist"><div class="wrap"><h2>${esc(T.services.upcoming)}</h2><div class="event-list">${related.map((e) => eventRow(e, lang)).join('')}</div></div></section>` : ''}
 <section class="section"><div class="wrap"><h2>${esc(T.services.others)}</h2><div class="svc-list">${others.map((x) => serviceRow(x, lang)).join('')}</div></div></section>`;
       pages.push({ lang, path, alt: { id: svcPath('id', s.slug), en: svcPath('en', s.slug) }, section: 'services', title: withName(name), description: truncate(L(s.summary, lang), 158),

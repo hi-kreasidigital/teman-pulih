@@ -2,8 +2,8 @@
   "_note": "Konten awal (fallback). Dipakai saat Airtable belum dikonfigurasi. Semua konten ini bisa diganti lewat Airtable (lihat docs/AIRTABLE-SETUP.md).",
   "settings": {
     "hero_title": {
-      "id": "Ruang untuk bernapas, hadir, dan pulih bersama.",
-      "en": "A space to breathe, arrive, and heal together."
+      "id": "Sacred Nusantara Sound Healing & Meditation",
+      "en": "Sacred Nusantara Sound Healing & Meditation"
     },
     "hero_subtitle": {
       "id": "Teman Pulih menemani komunitas dan institusi melalui konseling intuitif, sound healing Nusantara, meditasi suara, dan praktik grounding.",
@@ -40,6 +40,14 @@
     "disclaimer": {
       "id": "Layanan Teman Pulih bersifat komplementer dan tidak menggantikan perawatan medis atau psikologis profesional.",
       "en": "Teman Pulih services are complementary and do not replace professional medical or psychological care."
+    },
+    "hero_kicker": {
+      "id": "Teman Pulih Nusantara",
+      "en": "Teman Pulih Nusantara"
+    },
+    "hero_byline": {
+      "id": "by Fikri Arya",
+      "en": "by Fikri Arya"
     }
   },
   "services": [
@@ -59,7 +67,13 @@
         "en": "Online Intuitive Counseling is a one-to-one companionship session by video or voice. We speak slowly, follow what arises in your body and mind, and shape small steps that feel right.\n\nIt suits you if you are torn about a decision, emotionally tired, or want company while understanding yourself better.\n\n**What you can expect**\n\n- A safe, non-judgmental space to talk\n- Reflection and guiding questions to name your needs\n- A short breath or grounding practice when helpful\n- Notes on small next steps after the session"
       },
       "lynkUrl": "https://lynk.id/temanpulihmu/mlxp76804mkr",
-      "icon": "leaf"
+      "icon": "leaf",
+      "image": "/images/hero-fikri.jpg",
+      "imageAlt": {
+        "id": "Fikri Arya menyatukan tangan dalam sikap salam",
+        "en": "Fikri Arya with hands pressed together in greeting"
+      },
+      "gallery": []
     },
     {
       "slug": "sound-meditation-grounding",
@@ -77,7 +91,47 @@
         "en": "This session blends sound meditation with simple grounding practice. You sit or lie comfortably while the chime and hum of singing bowls guide your attention to breath and body.\n\nNo prior meditation experience needed.\n\n**A good fit for**\n\n- Individuals who want a pause from a busy routine\n- Communities or teams that need space to settle together\n- Opening or closing a workshop or retreat"
       },
       "lynkUrl": "https://lynk.id/temanpulihmu/l2d8q32e51qo",
-      "icon": "wave"
+      "icon": "wave",
+      "image": "/images/layanan/sound-meditation-private-group.jpg",
+      "imageAlt": {
+        "id": "Sesi sound meditation privat dengan singing bowl dan instrumen Nusantara",
+        "en": "Private sound meditation session with singing bowls and Nusantara instruments"
+      },
+      "gallery": [
+        {
+          "src": "/images/layanan/sound-meditation-private-group.jpg",
+          "alt": {
+            "id": "Sesi sound meditation privat dengan singing bowl dan instrumen Nusantara",
+            "en": "Private sound meditation session with singing bowls and Nusantara instruments"
+          },
+          "caption": {
+            "id": "Sound meditation privat dan kelompok",
+            "en": "Private and group sound meditation"
+          }
+        },
+        {
+          "src": "/images/layanan/sound-session-at-nature.jpg",
+          "alt": {
+            "id": "Sesi suara di alam, di bawah pohon besar",
+            "en": "Sound session in nature beneath a large tree"
+          },
+          "caption": {
+            "id": "Sesi suara di alam",
+            "en": "Sound session in nature"
+          }
+        },
+        {
+          "src": "/images/layanan/sound-session-at-temple.jpg",
+          "alt": {
+            "id": "Sesi suara di area candi",
+            "en": "Sound session at a temple site"
+          },
+          "caption": {
+            "id": "Sesi suara di candi",
+            "en": "Sound session at a temple"
+          }
+        }
+      ]
     },
     {
       "slug": "chakra-meridian-massage",
@@ -95,7 +149,36 @@
         "en": "A private massage session using gentle touch along meridian lines and chakra points. The focus is on relaxing muscles, easing tension, and helping the body feel more balanced.\n\nSessions are private. Share your condition and comfort level beforehand so pressure and areas of touch can be adjusted.\n\nIf you have a particular medical condition, please consult a health professional first."
       },
       "lynkUrl": "https://lynk.id/temanpulihmu/jz3nqo9z4x9p",
-      "icon": "stone"
+      "icon": "stone",
+      "image": "/images/layanan/private-meridian-massage-therapy.jpg",
+      "imageAlt": {
+        "id": "Terapi pijat meridian privat dengan singing bowl",
+        "en": "Private meridian massage therapy with a singing bowl"
+      },
+      "gallery": [
+        {
+          "src": "/images/layanan/private-meridian-massage-therapy.jpg",
+          "alt": {
+            "id": "Terapi pijat meridian privat dengan singing bowl",
+            "en": "Private meridian massage therapy with a singing bowl"
+          },
+          "caption": {
+            "id": "Terapi pijat meridian privat",
+            "en": "Private meridian massage therapy"
+          }
+        },
+        {
+          "src": "/images/layanan/chakra-singing-bowl-therapy.jpg",
+          "alt": {
+            "id": "Terapi chakra dengan singing bowl dalam sesi kelompok",
+            "en": "Chakra singing bowl therapy in a group session"
+          },
+          "caption": {
+            "id": "Terapi singing bowl chakra",
+            "en": "Chakra singing bowl therapy"
+          }
+        }
+      ]
     },
     {
       "slug": "sound-healing-nusantara",
@@ -113,7 +196,58 @@
         "en": "An immersive listening experience: you lie or sit comfortably while waves of sound from singing bowls and Nusantara instruments fill the room. Sessions can be private or for a group.\n\nFor communities and institutions we adapt the theme, length, and group size to your event, for example a workshop closing, a mental health day, or a team retreat.\n\nMessage us on WhatsApp to find the format that fits best."
       },
       "lynkUrl": "https://lynk.id/temanpulihmu/524y5eo236rd",
-      "icon": "bowl"
+      "icon": "bowl",
+      "image": "/images/layanan/multi-instruments-sound-healing.jpg",
+      "imageAlt": {
+        "id": "Sound healing dengan instrumen tiup tradisional",
+        "en": "Sound healing with a traditional wind instrument"
+      },
+      "gallery": [
+        {
+          "src": "/images/layanan/multi-instruments-sound-healing.jpg",
+          "alt": {
+            "id": "Sound healing dengan instrumen tiup tradisional",
+            "en": "Sound healing with a traditional wind instrument"
+          },
+          "caption": {
+            "id": "Sound healing multi-instrumen",
+            "en": "Multi-instrument sound healing"
+          }
+        },
+        {
+          "src": "/images/layanan/group-sound-healing-therapy.jpg",
+          "alt": {
+            "id": "Sound healing kelompok dengan instrumen Nusantara",
+            "en": "Group sound healing with Nusantara instruments"
+          },
+          "caption": {
+            "id": "Sound healing kelompok",
+            "en": "Group sound healing therapy"
+          }
+        },
+        {
+          "src": "/images/layanan/sound-based-institution-session.jpg",
+          "alt": {
+            "id": "Sesi berbasis suara untuk institusi dengan banyak peserta",
+            "en": "Sound-based session for an institution with a large group"
+          },
+          "caption": {
+            "id": "Sesi berbasis suara untuk institusi",
+            "en": "Sound-based institution session"
+          }
+        },
+        {
+          "src": "/images/layanan/group-sound-healing-for-child.jpg",
+          "alt": {
+            "id": "Sound healing kelompok untuk anak-anak",
+            "en": "Group sound healing for children"
+          },
+          "caption": {
+            "id": "Sound healing kelompok untuk anak",
+            "en": "Group sound healing for children"
+          }
+        }
+      ]
     }
   ],
   "events": [

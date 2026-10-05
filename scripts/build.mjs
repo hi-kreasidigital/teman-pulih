@@ -22,7 +22,7 @@ fs.cpSync(path.join(root, 'public'), dist, { recursive: true });
 
 // 2) CSS: variabel warna dari config + stylesheet
 const c = site.colors;
-const rootVars = `:root{--turq:${c.turquoise};--turq-deep:${c.turquoiseDeep};--turq-soft:${c.turquoiseSoft};--gold:${c.gold};--gold-deep:${c.goldDeep};--gold-soft:${c.goldSoft};--ink:${c.ink};--paper:${c.paper};--mist:${c.mist};--kawung:${kawungDataUri('%23B88A2E', '.32')};--kawung-light:${kawungDataUri('%23D9B55C', '.28')}}\n`;
+const rootVars = `:root{--turq:${c.turquoise};--turq-deep:${c.turquoiseDeep};--turq-soft:${c.turquoiseSoft};--gold:${c.gold};--gold-deep:${c.goldDeep};--gold-soft:${c.goldSoft};--ink:${c.ink};--paper:${c.paper};--mist:${c.mist};--cream:${c.cream};--brown:${c.brown};--olive:${c.olive};--batik:url("${site.basePath}/images/batik.jpg");--kawung:${kawungDataUri('%23B88A2E', '.32')};--kawung-light:${kawungDataUri('%23D9B55C', '.28')}}\n`;
 const css = rootVars + fs.readFileSync(path.join(root, 'src/styles/main.css'), 'utf8');
 const hash = crypto.createHash('md5').update(css).digest('hex').slice(0, 8);
 fs.mkdirSync(path.join(dist, 'css'), { recursive: true });

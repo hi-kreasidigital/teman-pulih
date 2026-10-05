@@ -55,20 +55,25 @@ const bi = (f, name) => ({ id: txt(f[`${name} ID`]), en: txt(f[`${name} EN`]) })
 const isPublished = (f) => f.Published === true;
 const num = (v, d = 999) => (Number.isFinite(Number(v)) && v !== '' && v != null ? Number(v) : d);
 
-async function localImage(att) {
-  if (!Array.isArray(att) || !att[0]?.url) return '';
-  const a = att[0];
-  const ext = (path.extname(a.filename || '') || '.jpg').toLowerCase();
-  const name = crypto.createHash('md5').update(a.id || a.url).digest('hex').slice(0, 12) + ext;
-  const dest = path.join(imgDir, name);
-  if (!fs.existsSync(dest)) {
-    const res = await fetch(a.url);
-    if (!res.ok) throw new Error(`Gagal mengunduh gambar ${a.filename} (${res.status})`);
-    fs.mkdirSync(imgDir, { recursive: true });
-    fs.writeFileSync(dest, Buffer.from(await res.arrayBuffer()));
+async function localImages(att) {
+  if (!Array.isArray(att)) return [];
+  const out = [];
+  for (const a of att) {
+    if (!a?.url) continue;
+    const ext = (path.extname(a.filename || '') || '.jpg').toLowerCase();
+    const name = crypto.createHash('md5').update(a.id || a.url).digest('hex').slice(0, 12) + ext;
+    const dest = path.join(imgDir, name);
+    if (!fs.existsSync(dest)) {
+      const res = await fetch(a.url);
+      if (!res.ok) throw new Error(`Gagal mengunduh gambar ${a.filename} (${res.status})`);
+      fs.mkdirSync(imgDir, { recursive: true });
+      fs.writeFileSync(dest, Buffer.from(await res.arrayBuffer()));
+    }
+    out.push(`/images/cms/${name}`);
   }
-  return `/images/cms/${name}`;
+  return out;
 }
+const localImage = async (att) => (await localImages(Array.isArray(att) ? att.slice(0, 1) : att))[0] || '';
 
 try {
   const [rs, rv, re, rp, rb] = await Promise.all([
@@ -90,11 +95,20 @@ try {
   const services = [];
   for (const r of rv.filter((r) => isPublished(r.fields))) {
     const f = r.fields; const title = bi(f, 'Title');
+    const slug = txt(f.Slug) || slugify(title.id || title.en);
+    const fallback = seed.services.find((x) => x.slug === slug) || {};
+    // Foto dari Airtable (kolom Image & Gallery); bila kosong, pakai foto bawaan di repo
+    const image = (await localImage(f.Image)) || fallback.image || '';
+    const alt = bi(f, 'Image Alt');
+    const gal = await localImages(f.Gallery);
+    const gallery = gal.length
+      ? gal.map((src, i) => ({ src, alt: { id: `${title.id} ${i + 1}`, en: `${title.en || title.id} ${i + 1}` }, caption: { id: title.id, en: title.en || title.id } }))
+      : fallback.gallery || [];
     services.push({
-      slug: txt(f.Slug) || slugify(title.id || title.en), order: num(f.Order),
+      slug, order: num(f.Order),
       title, summary: bi(f, 'Summary'), description: bi(f, 'Description'),
       lynkUrl: txt(f['Lynk URL']), icon: txt(f.Icon) || 'leaf',
-      image: await localImage(f.Image), imageAlt: bi(f, 'Image Alt')
+      image, imageAlt: alt.id || alt.en ? alt : fallback.imageAlt || alt, gallery
     });
   }
 

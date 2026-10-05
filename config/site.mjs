@@ -36,7 +36,10 @@ export const site = {
     goldSoft: '#F6EDD6',
     ink: '#1D2B2A',
     paper: '#FFFFFF',
-    mist: '#F7F9F6'
+    mist: '#F7F9F6',
+    cream: '#FBF4E6',          // latar hangat bernuansa batik
+    brown: '#6B4E12',          // coklat emas (banner)
+    olive: '#5A5942'           // pita gelap (CTA)
   }
 };
 
