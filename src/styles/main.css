@@ -290,7 +290,7 @@ p{margin:0 0 1.1em}
 
 /* ================= REVISI 2 ================= */
 /* batik di sisi kiri & kanan layar (hanya muncul bila ada ruang di luar konten) */
-body::before,body::after{content:"";position:fixed;top:0;bottom:0;z-index:40;width:var(--side);background:#1a0f06 var(--batik-side) left top/100% auto repeat-y;pointer-events:none}
+body::before,body::after{content:"";position:fixed;top:0;bottom:0;z-index:40;width:var(--side);background:var(--batik-side) left top/100% auto repeat-y;pointer-events:none;opacity:.9;-webkit-mask-image:linear-gradient(90deg,#000 55%,transparent);mask-image:linear-gradient(90deg,#000 55%,transparent)}
 body::before{left:0}
 body::after{right:0;transform:scaleX(-1)}
 .site-footer::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--batik) left bottom/auto 100% repeat-x;mix-blend-mode:multiply;opacity:.8;-webkit-mask-image:linear-gradient(90deg,#000,transparent 70%);mask-image:linear-gradient(90deg,#000,transparent 70%)}
