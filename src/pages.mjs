@@ -212,7 +212,21 @@ ${ctaBand(lang, T.home.ctaTitle, T.home.ctaBody)}`;
 
     // ================= PRODUCTS =================
     {
-      const blocks = products.map((p, i) => productSection(p, lang, i, true)).join('');
+      const shopCard = (p, g) => {
+        const name = L(g.alt, lang) || L(p.title, lang);
+        return `<article class="shop-card"><figure class="shop-img"><img src="${imgUrl(g.src)}" alt="${esc(name)}" width="600" height="600" loading="lazy" decoding="async"></figure>
+          <h3>${esc(name)}</h3>
+          <a class="btn" href="${wa(lang, 'buy', name)}" target="_blank" rel="noopener">${icons.whatsapp}<span>${esc(T.products.buyNow)}</span></a></article>`;
+      };
+      const blocks = products.map((p, i) => {
+        const items = (p.gallery && p.gallery.length ? p.gallery : p.image ? [{ src: p.image, alt: p.title }] : []);
+        return `<section class="section shop-sec${i % 2 === 0 ? ' section-mist' : ''}" id="${esc(p.slug)}"><div class="wrap">
+          <div class="shop-head"><h2>${esc(L(p.title, lang))}</h2><p class="lead">${esc(L(p.summary, lang))}</p>
+          ${L(p.price, lang) ? `<p class="price">${esc(T.products.price)}: ${esc(L(p.price, lang))}</p>` : ''}
+          ${p.referenceUrl ? `<p><a class="link" href="${esc(p.referenceUrl)}" target="_blank" rel="noopener">${esc(L(p.referenceLabel, lang) || p.referenceUrl)}</a></p>` : ''}</div>
+          ${items.length ? `<div class="shop-grid">${items.map((g) => shopCard(p, g)).join('')}</div>` : `<p class="empty"><a class="btn" href="${p.orderUrl || wa(lang, 'buy', L(p.title, lang))}" target="_blank" rel="noopener">${esc(T.products.buyNow)}</a></p>`}
+          </div></section>`;
+      }).join('');
       const body = `<div class="wrap page-top">${crumbs(lang, [{ name: T.nav.products, path: routes.products[lang] }])}
   <h1>${esc(T.products.h1)}</h1><p class="lead">${esc(T.products.lead)}</p></div>${blocks}
 ${testiSection(lang)}`;

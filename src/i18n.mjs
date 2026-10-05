@@ -85,6 +85,7 @@ export const t = {
       h1: 'Produk',
       lead: 'Alat bunyi untuk praktik harian Anda, dan layanan grafir untuk memberinya identitas.',
       orderWA: 'Pesan lewat WhatsApp',
+      buyNow: 'Beli sekarang',
       price: 'Harga'
     },
     blog: {
@@ -114,6 +115,7 @@ export const t = {
       service: (n) => `Halo Teman Pulih, saya ingin bertanya tentang layanan ${n}.`,
       event: (n) => `Halo Teman Pulih, saya ingin mendaftar acara ${n}.`,
       product: (n) => `Halo Teman Pulih, saya ingin bertanya tentang ${n}.`,
+      buy: (n) => `Halo Teman Pulih, saya ingin membeli ${n}.`,
       group: 'Halo Teman Pulih, kami dari komunitas/institusi dan ingin mendiskusikan sesi untuk kelompok kami.'
     },
     breadcrumbHome: 'Beranda'
@@ -193,6 +195,7 @@ export const t = {
       h1: 'Products',
       lead: 'Sound instruments for your daily practice, and an engraving service that gives them an identity.',
       orderWA: 'Order via WhatsApp',
+      buyNow: 'Buy now',
       price: 'Price'
     },
     blog: {
@@ -222,6 +225,7 @@ export const t = {
       service: (n) => `Hello Teman Pulih, I would like to ask about ${n}.`,
       event: (n) => `Hello Teman Pulih, I would like to register for ${n}.`,
       product: (n) => `Hello Teman Pulih, I would like to ask about ${n}.`,
+      buy: (n) => `Hello Teman Pulih, I would like to buy ${n}.`,
       group: 'Hello Teman Pulih, we are a community/institution and would like to discuss a session for our group.'
     },
     breadcrumbHome: 'Home'

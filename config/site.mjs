@@ -21,10 +21,10 @@ export const site = {
   defaultLang: 'id',
   langs: ['id', 'en'],
 
-  whatsapp: '6281234517721',
+  whatsapp: '6285645599252',
   lynkStore: 'https://lynk.id/temanpulihmu',
   instagram: 'https://www.instagram.com/fikrarya/',
-  email: '', // opsional
+  email: 'temanpulihmu@gmail.com',
 
   // Warna brand (nature + nusantara: emas & turquoise di atas banyak white space)
   colors: {

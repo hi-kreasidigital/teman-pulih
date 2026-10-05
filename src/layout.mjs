@@ -107,6 +107,7 @@ ${body}
       <h2 class="footer-h">${esc(T.footer.contact)}</h2>
       <ul class="footer-list">
         <li><a class="with-icon" href="${waLink(T.wa.general)}" target="_blank" rel="noopener">${icons.whatsapp}<span>+${site.whatsapp.replace(/^(\d{2})(\d{3})(\d{4})(\d+)$/, '$1 $2-$3-$4')}</span></a></li>
+        ${site.email ? `<li><a class="with-icon" href="mailto:${site.email}">${icons.mail}<span>${esc(site.email)}</span></a></li>` : ''}
         <li><a class="with-icon" href="${site.instagram}" target="_blank" rel="noopener me">${icons.instagram}<span>${esc(T.footer.instagram)}</span></a></li>
       </ul>
     </div>
@@ -131,7 +132,7 @@ export const orgLd = () => ({
   url: site.url,
   logo: abs('/images/logo.png'),
   sameAs: [site.instagram, site.lynkStore],
-  contactPoint: [{ '@type': 'ContactPoint', contactType: 'customer service', telephone: `+${site.whatsapp}`, availableLanguage: ['id', 'en'] }]
+  contactPoint: [{ '@type': 'ContactPoint', contactType: 'customer service', telephone: `+${site.whatsapp}`, ...(site.email ? { email: site.email } : {}), availableLanguage: ['id', 'en'] }]
 });
 
 export const websiteLd = (lang) => ({
