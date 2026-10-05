@@ -77,7 +77,7 @@ async function localImages(att) {
 const localImage = async (att) => (await localImages(Array.isArray(att) ? att.slice(0, 1) : att))[0] || '';
 
 try {
-  const [rs, rv, re, rp, rb, rt] = await Promise.all([
+  const [rs, rv, re, rb, rp, rt] = await Promise.all([
     fetchAll(TABLES.settings, { optional: true }),
     fetchAll(TABLES.services),
     fetchAll(TABLES.events),
