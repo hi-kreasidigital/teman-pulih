@@ -132,8 +132,11 @@ try {
     const pslug = txt(f.Slug) || slugify(title.id || title.en);
     const pfb = seed.products.find((x) => x.slug === pslug) || {};
     const pgal = await localImages(f.Gallery);
-    const pgallery = pgal.length
-      ? pgal.map((src, i) => ({ src, alt: { id: `${title.id} ${i + 1}`, en: `${title.en || title.id} ${i + 1}` }, caption: { id: title.id, en: title.en || title.id } }))
+    // Foto dari Airtable (kolom Image lalu Gallery) selalu menggantikan foto bawaan
+    const pmain = await localImage(f.Image);
+    const psrcs = [...(pmain ? [pmain] : []), ...pgal];
+    const pgallery = psrcs.length
+      ? psrcs.map((src, i) => ({ src, alt: { id: `${title.id} ${i + 1}`, en: `${title.en || title.id} ${i + 1}` }, caption: { id: title.id, en: title.en || title.id } }))
       : pfb.gallery || [];
     products.push({
       gallery: pgallery,
