@@ -28,7 +28,8 @@ jobs:
           node-version: 22
       - name: Build (sync Airtable lalu generate situs)
         env:
-          SITE_URL: ${{ vars.SITE_URL }}
+          # Jika variable SITE_URL kosong, otomatis pakai URL github.io repo ini
+          SITE_URL: ${{ vars.SITE_URL || format('https://{0}.github.io/{1}', github.repository_owner, github.event.repository.name) }}
           AIRTABLE_TOKEN: ${{ secrets.AIRTABLE_TOKEN }}
           AIRTABLE_BASE_ID: ${{ secrets.AIRTABLE_BASE_ID }}
         run: npm run build
