@@ -1,0 +1,7 @@
+node_modules
+dist
+data/cms.json
+public/images/cms/*
+!public/images/cms/.gitkeep
+.env
+.DS_Store
