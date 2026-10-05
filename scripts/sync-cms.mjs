@@ -150,14 +150,18 @@ try {
   }
 
   const posts = [];
+  const tagList = (v) => txt(v).split(',').map((x) => x.trim()).filter(Boolean);
   for (const r of rp.filter((r) => isPublished(r.fields))) {
     const f = r.fields; const title = bi(f, 'Title');
+    const slugId = txt(f['Slug ID']) || txt(f.Slug) || slugify(title.id || title.en);
+    const tagsId = tagList(f['Tags ID'] ?? f.Tags);
+    const tagsEn = tagList(f['Tags EN']);
     posts.push({
-      slug: txt(f.Slug) || slugify(title.id || title.en), slugEn: txt(f['Slug EN']),
+      slug: slugId, slugEn: txt(f['Slug EN']),
       date: txt(f['Publish Date']).slice(0, 10), instagramUrl: txt(f['Instagram URL']),
-      tags: txt(f.Tags).split(',').map((t) => t.trim()).filter(Boolean),
+      tags: { id: tagsId, en: tagsEn.length ? tagsEn : tagsId },
       title, metaDescription: bi(f, 'Meta Description'), excerpt: bi(f, 'Excerpt'), body: bi(f, 'Body'),
-      image: await localImage(f.Image), imageAlt: bi(f, 'Image Alt')
+      image: await localImage(f.Image), imageAlt: { id: title.id, en: title.en || title.id }
     });
   }
 

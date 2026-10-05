@@ -479,10 +479,16 @@
       "slug": "mengapa-suara-singing-bowl-menenangkan",
       "date": "2026-09-20",
       "instagramUrl": "https://www.instagram.com/p/DcwO7jHE2nC/",
-      "tags": [
-        "sound healing",
-        "singing bowl"
-      ],
+      "tags": {
+        "id": [
+          "sound healing",
+          "singing bowl"
+        ],
+        "en": [
+          "sound healing",
+          "singing bowl"
+        ]
+      },
       "title": {
         "id": "Mengapa Suara Singing Bowl Terasa Menenangkan?",
         "en": "Why Does the Sound of a Singing Bowl Feel So Calming?"
@@ -505,10 +511,16 @@
       "slug": "latihan-grounding-lima-menit",
       "date": "2026-09-27",
       "instagramUrl": "https://www.instagram.com/p/DciPP2gTVaM/",
-      "tags": [
-        "grounding",
-        "napas"
-      ],
+      "tags": {
+        "id": [
+          "grounding",
+          "napas"
+        ],
+        "en": [
+          "grounding",
+          "breath"
+        ]
+      },
       "title": {
         "id": "Latihan Grounding 5 Menit Saat Pikiran Terasa Penuh",
         "en": "A 5-Minute Grounding Practice for When Your Mind Feels Full"
@@ -531,10 +543,16 @@
       "slug": "apa-itu-konseling-intuitif",
       "date": "2026-10-02",
       "instagramUrl": "https://www.instagram.com/p/DbAVeSfz333/",
-      "tags": [
-        "konseling",
-        "intuisi"
-      ],
+      "tags": {
+        "id": [
+          "konseling",
+          "intuisi"
+        ],
+        "en": [
+          "counseling",
+          "intuition"
+        ]
+      },
       "title": {
         "id": "Apa Itu Konseling Intuitif dan Kapan Anda Membutuhkannya?",
         "en": "What Is Intuitive Counseling and When Might You Need It?"

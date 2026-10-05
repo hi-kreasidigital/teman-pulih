@@ -10,6 +10,7 @@ const svcPath = (lang, slug) => `${routes.services[lang]}${slug}/`;
 const postPath = (lang, p) => `${routes.blog[lang]}${(lang === 'en' && p.slugEn) || p.slug}/`;
 const withName = (title) => (title.length + site.name.length + 3 <= 66 ? `${title} | ${site.name}` : title);
 const byOrder = (a, b) => (a.order ?? 999) - (b.order ?? 999);
+const tagsOf = (p, lang) => (Array.isArray(p.tags) ? p.tags : (p.tags?.[lang]?.length ? p.tags[lang] : p.tags?.id) || []);
 const hasPost = (p, lang) => Boolean(p.title?.[lang] && p.body?.[lang]);
 
 export function buildPages(cms) {
@@ -98,7 +99,7 @@ export function buildPages(cms) {
     <time datetime="${esc(p.date)}">${fmtDate(p.date, lang)}</time>
     <h3><a href="${u(postPath(lang, p))}">${esc(p.title[lang])}</a></h3>
     <p>${esc(L(p.excerpt, lang) || truncate(stripMd(p.body[lang]), 150))}</p>
-    ${p.tags?.length ? `<ul class="tags">${p.tags.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}</article>`;
+    ${tagsOf(p, lang).length ? `<ul class="tags">${tagsOf(p, lang).map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}</article>`;
 
   const eventLd = (ev, lang) => {
     const mode = { Online: 'OnlineEventAttendanceMode', Offline: 'OfflineEventAttendanceMode', Hybrid: 'MixedEventAttendanceMode' }[ev.mode] || 'OnlineEventAttendanceMode';
@@ -268,7 +269,7 @@ ${more.length ? `<section class="section section-mist"><div class="wrap"><h2>${e
         jsonld: [breadcrumbLd([{ name: T.breadcrumbHome, path: routes.home[lang] }, { name: T.nav.blog, path: routes.blog[lang] }, { name: title, path }]),
           { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: title, description: desc, datePublished: p.date, dateModified: p.date, inLanguage: lang,
             mainEntityOfPage: abs(path), author: { '@id': `${site.url}/#org` }, publisher: { '@id': `${site.url}/#org` },
-            ...(p.image ? { image: [abs(p.image)] } : {}), ...(p.tags?.length ? { keywords: p.tags.join(', ') } : {}) }] });
+            ...(p.image ? { image: [abs(p.image)] } : {}), ...(tagsOf(p, lang).length ? { keywords: tagsOf(p, lang).join(', ') } : {}) }] });
     }
   }
 

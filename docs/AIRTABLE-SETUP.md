@@ -21,7 +21,7 @@ Setelah impor, ubah tipe kolom agar nyaman diedit:
 - **Services**: Slug, Order, Published, Title/Summary/Description (ID & EN), Lynk URL, Icon (`leaf`, `wave`, `stone`, `bowl`), Image, Gallery
 - **Events**: Slug, Published, Title/Description (ID & EN), Date, Time, Mode, Location, Service Slug (isi slug layanan), Registration URL (opsional; kosong = tombol WhatsApp), Image
 - **Products**: Slug, Order, Published, Category, Title/Summary/Description/Price (ID & EN), Order URL (opsional), Reference URL + Reference Label (ID & EN), Image
-- **Posts**: Slug, Slug EN (slug versi Inggris, penting untuk SEO), Published, Publish Date, Instagram URL, Tags (pisahkan koma), Title (= judul SEO), Meta Description, Excerpt, Body (Markdown) dalam ID & EN, Image
+- **Posts** (urutan kolom sama dengan output prompt di `docs/ARTIKEL-PROMPT.md`): Title ID/EN, Meta Description ID/EN, Slug ID/EN, Excerpt ID/EN, Tags ID/EN (pisahkan koma), Body ID/EN (Markdown), lalu Published, Publish Date, Instagram URL, Image (opsional). Tidak ada Image Alt: teks alt memakai judul artikel.
 - **Site Settings**: Key, ID, EN (teks hero, tentang, disclaimer). Jangan ubah nilai Key.
 
 Aturan: kolom bahasa yang kosong otomatis memakai bahasa lainnya, **kecuali artikel blog**: halaman artikel hanya dibuat untuk bahasa yang Title dan Body-nya terisi.
@@ -54,3 +54,6 @@ Kunci **Site Settings** `hero_kicker`, `hero_title`, `hero_byline`, `hero_subtit
 - Tabel baru **Testimonials**: Slug, Published, Order, Heading ID/EN, Image (attachment, opsional), Quote ID/EN, Name, Role ID/EN. Bila tabel kosong/tidak ada, situs memakai testimoni bawaan. Judul seksi diatur lewat Site Settings `testimonial_title`.
 - Tabel **Products** punya field baru **Gallery** (attachment, maks. 4 foto tampil). Kosong = foto bawaan di `public/images/produk/`. Singing bowl dan jasa grafir tampil sebagai dua seksi terpisah di beranda dan halaman produk.
 - Token Airtable perlu akses baca ke tabel Testimonials.
+
+## Kapan situs diperbarui?
+Mencentang Published di Airtable tidak langsung mengubah situs. Situs dibangun ulang (a) otomatis tiap hari pukul 00:00 WIB, (b) saat Anda menjalankan workflow **Deploy ke GitHub Pages** (Actions → Run workflow), atau (c) saat Airtable Automation memanggil `repository_dispatch` bertipe `airtable-update`.
