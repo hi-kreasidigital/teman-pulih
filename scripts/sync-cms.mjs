@@ -144,7 +144,6 @@ try {
       category: txt(f.Category) || 'singing-bowl',
       title, summary: bi(f, 'Summary'), description: bi(f, 'Description'),
       price: bi(f, 'Price'), orderUrl: txt(f['Order URL']),
-      referenceUrl: txt(f['Reference URL']), referenceLabel: bi(f, 'Reference Label'),
       image: await localImage(f.Image), imageAlt: bi(f, 'Image Alt')
     });
   }

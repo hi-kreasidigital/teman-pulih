@@ -20,7 +20,7 @@ Setelah impor, ubah tipe kolom agar nyaman diedit:
 ## 2. Kolom per tabel
 - **Services**: Slug, Order, Published, Title/Summary/Description (ID & EN), Lynk URL, Icon (`leaf`, `wave`, `stone`, `bowl`), Image, Gallery
 - **Events**: Slug, Published, Title/Description (ID & EN), Date, Time, Mode, Location, Service Slug (isi slug layanan), Registration URL (opsional; kosong = tombol WhatsApp), Image
-- **Products**: Slug, Order, Published, Category, Title/Summary/Description/Price (ID & EN), Order URL (opsional), Reference URL + Reference Label (ID & EN), Image
+- **Products**: Slug, Order, Published, Category, Title/Summary/Description/Price (ID & EN), Order URL (opsional), Image
 - **Posts** (urutan kolom sama dengan output prompt di `docs/ARTIKEL-PROMPT.md`): Title ID/EN, Meta Description ID/EN, Slug ID/EN, Excerpt ID/EN, Tags ID/EN (pisahkan koma), Body ID/EN (Markdown), lalu Published, Publish Date, Instagram URL, Image (opsional). Tidak ada Image Alt: teks alt memakai judul artikel.
 - **Site Settings**: Key, ID, EN (teks hero, tentang, disclaimer). Jangan ubah nilai Key.
 

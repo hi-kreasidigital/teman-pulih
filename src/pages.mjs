@@ -54,7 +54,7 @@ export function buildPages(cms) {
         ${full ? `<div class="prose">${md(L(p.description, lang))}</div>` : ''}
         ${full && L(p.price, lang) ? `<p class="price">${esc(T.products.price)}: ${esc(L(p.price, lang))}</p>` : ''}
         <div class="actions"><a class="btn" href="${orderHref}" target="_blank" rel="noopener">${icons.whatsapp}<span>${esc(T.products.orderWA)}</span></a>
-        ${full ? (p.referenceUrl ? `<a class="btn btn-ghost" href="${esc(p.referenceUrl)}" target="_blank" rel="noopener">${esc(L(p.referenceLabel, lang) || p.referenceUrl)}</a>` : '') : `<a class="btn btn-ghost" href="${u(routes.products[lang])}#${esc(p.slug)}">${esc(T.detail)}</a>`}</div></div>
+        ${full ? '' : `<a class="btn btn-ghost" href="${u(routes.products[lang])}#${esc(p.slug)}">${esc(T.detail)}</a>`}</div></div>
       <div class="prod-visual">${prodGallery(p, lang)}</div></div></section>`;
   };
 
@@ -224,7 +224,6 @@ ${ctaBand(lang, T.home.ctaTitle, T.home.ctaBody)}`;
         return `<section class="section shop-sec${i % 2 === 0 ? ' section-mist' : ''}" id="${esc(p.slug)}"><div class="wrap">
           <div class="shop-head"><h2>${esc(L(p.title, lang))}</h2><p class="lead">${esc(L(p.summary, lang))}</p>
           ${L(p.price, lang) ? `<p class="price">${esc(T.products.price)}: ${esc(L(p.price, lang))}</p>` : ''}
-          ${p.referenceUrl ? `<p><a class="link" href="${esc(p.referenceUrl)}" target="_blank" rel="noopener">${esc(L(p.referenceLabel, lang) || p.referenceUrl)}</a></p>` : ''}</div>
           ${items.length ? `<div class="shop-grid">${items.map((g) => shopCard(p, g)).join('')}</div>` : `<p class="empty"><a class="btn" href="${p.orderUrl || wa(lang, 'buy', L(p.title, lang))}" target="_blank" rel="noopener">${esc(T.products.buyNow)}</a></p>`}
           </div></section>`;
       }).join('');
