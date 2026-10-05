@@ -77,7 +77,7 @@ ${ld}
 <header class="site-header">
   <div class="wrap header-in">
     <a class="brand" href="${u(routes.home[lang])}" aria-label="${esc(site.name)}">${logoImg()}<span>${esc(site.name)}</span></a>
-    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">${esc(T.menu)}</button>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="${esc(T.menu)}"><span class="burger" aria-hidden="true"><i></i><i></i><i></i></span></button>
     <nav id="site-nav" class="site-nav" aria-label="Main">
       ${navHtml(lang, section)}
       <div class="nav-tools">
@@ -117,7 +117,12 @@ ${body}
 <a class="wa-float" href="${waLink(T.wa.general)}" target="_blank" rel="noopener" aria-label="${esc(T.chatWA)}">${icons.whatsapp}<span>${esc(T.waShort)}</span></a>
 <script>
 (function(){var b=document.querySelector('.menu-btn'),n=document.getElementById('site-nav');if(!b||!n)return;
-b.addEventListener('click',function(){var o=b.getAttribute('aria-expanded')==='true';b.setAttribute('aria-expanded',String(!o));n.classList.toggle('open',!o);});})();
+function set(o){b.setAttribute('aria-expanded',String(o));n.classList.toggle('open',o);document.body.classList.toggle('nav-open',o);}
+b.addEventListener('click',function(){set(b.getAttribute('aria-expanded')!=='true');});
+n.addEventListener('click',function(e){if(e.target.closest('a'))set(false);});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
+document.addEventListener('click',function(e){if(!e.target.closest('.site-header'))set(false);});
+window.addEventListener('resize',function(){if(window.innerWidth>980)set(false);});})();
 </script>
 </body>
 </html>`;

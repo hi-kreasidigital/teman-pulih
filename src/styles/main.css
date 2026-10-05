@@ -397,3 +397,47 @@ body::before,body::after{background-size:max(var(--side),46px) auto}
 .shop-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
 @media (max-width:1000px){.shop-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:640px){.shop-card{padding:.55rem .55rem .8rem}.shop-card .btn{padding:.65rem .4rem;font-size:.88rem;white-space:nowrap;gap:.4rem}.shop-card .btn svg{width:1.1em;height:1.1em}}
+
+/* ================= REVISI 6: optimasi HP, menu burger, batik sisi di HP ================= */
+/* batik sisi: menyatu dengan warna latar (multiply), tampil juga di HP */
+:root{--bside:var(--side)}
+body::before,body::after{width:var(--bside);mix-blend-mode:multiply;opacity:1}
+@media (max-width:1150px){
+  :root{--bside:clamp(26px,8vw,64px)}
+  body::before,body::after{opacity:.8;-webkit-mask-image:linear-gradient(90deg,#000 35%,transparent);mask-image:linear-gradient(90deg,#000 35%,transparent)}
+  .wrap{width:min(1120px,100% - clamp(3.4rem,13vw,7rem))}
+  .site-header .wrap{width:calc(100% - 2rem)}
+  .wa-float{z-index:70}
+}
+
+/* menu burger */
+.menu-btn{display:none;align-items:center;justify-content:center;width:46px;height:46px;padding:0;border:1.5px solid var(--turq-deep);border-radius:50%;background:#fff;color:var(--turq-deep);cursor:pointer}
+.burger{position:relative;display:block;width:20px;height:14px}
+.burger i{position:absolute;left:0;width:100%;height:2px;border-radius:2px;background:currentColor;transition:transform .25s,opacity .2s,top .25s}
+.burger i:nth-child(1){top:0}.burger i:nth-child(2){top:6px}.burger i:nth-child(3){top:12px}
+.menu-btn[aria-expanded="true"] .burger i:nth-child(1){top:6px;transform:rotate(45deg)}
+.menu-btn[aria-expanded="true"] .burger i:nth-child(2){opacity:0}
+.menu-btn[aria-expanded="true"] .burger i:nth-child(3){top:6px;transform:rotate(-45deg)}
+@media (max-width:980px){
+  .menu-btn{display:inline-flex}
+  .site-nav{display:flex;visibility:hidden;opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .2s,transform .2s,visibility 0s .2s;
+    position:absolute;left:0;right:0;top:100%;background:#fff;border-bottom:3px solid var(--gold);box-shadow:0 18px 30px rgba(29,43,42,.12);
+    padding:.4rem 1.25rem 1.4rem;flex-direction:column;align-items:stretch;gap:0;max-height:calc(100vh - 72px);overflow:auto}
+  .site-nav.open{visibility:visible;opacity:1;transform:none;pointer-events:auto;transition:opacity .2s,transform .2s}
+  .site-nav>a{padding:.95rem .2rem;font-size:1.1rem;border-bottom:1px solid rgba(29,43,42,.08)}
+  .site-nav>a[aria-current]{border-bottom-color:var(--gold)}
+  .nav-tools{margin:1rem 0 0;justify-content:space-between;gap:.8rem}
+  .nav-tools .btn{flex:1}
+}
+
+/* tipografi & tata letak HP */
+@media (max-width:640px){
+  body{font-size:1rem}
+  h1{font-size:clamp(2rem,9vw,2.6rem)}
+  h2{font-size:clamp(1.55rem,6.6vw,2rem)}
+  .banner h1{font-size:clamp(2rem,9vw,2.6rem)}
+  .banner-by{font-size:1.35rem}
+  .banner .actions{flex-wrap:wrap;gap:.9rem 1.2rem}
+  .btn{padding:.8rem 1.25rem}
+  .footer-grid{gap:1.6rem}
+}
