@@ -168,7 +168,7 @@ p{margin:0 0 1.1em}
 .cta-band p{margin:0;color:rgba(255,255,255,.88);max-width:36em}
 
 /* ---------- footer ---------- */
-.site-footer{background:var(--cream);border-top:3px solid var(--gold);padding-top:3rem;margin-top:0}
+.site-footer{position:relative;isolation:isolate;overflow:hidden;background:var(--turq-soft);border-top:3px solid var(--gold);padding-top:3rem;margin-top:0}
 .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1.2fr;gap:2.5rem}
 .footer-tag{margin:.9rem 0 0;max-width:22em;color:rgba(29,43,42,.78)}
 .footer-h{font-family:"Figtree",system-ui,sans-serif;font-size:1rem;font-weight:600;margin:0 0 .8rem}
@@ -236,19 +236,19 @@ p{margin:0 0 1.1em}
 .page-top::after{content:"";position:absolute;right:0;top:0;bottom:-1rem;width:min(48%,520px);z-index:-1;background:var(--batik) center/auto 100% repeat-x;opacity:.55;mix-blend-mode:multiply;pointer-events:none;-webkit-mask-image:linear-gradient(270deg,#000,transparent);mask-image:linear-gradient(270deg,#000,transparent)}
 
 /* Banner hero, mengacu pada portofolio */
-.banner{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);min-height:clamp(440px,46vw,600px);background:linear-gradient(90deg,#FBF4E6 0%,#EEDDB4 34%,#B8923A 58%,#7B5A14 78%,#5E440E 100%)}
-.banner-bg{position:absolute;inset:0;z-index:-1;background:var(--batik) left center/auto 125% repeat-x;mix-blend-mode:multiply;-webkit-mask-image:linear-gradient(90deg,#000 0%,#000 30%,transparent 62%);mask-image:linear-gradient(90deg,#000 0%,#000 30%,transparent 62%)}
-.banner-copy{position:relative;align-self:center;margin:clamp(1rem,2.4vw,1.6rem) 0 clamp(1rem,2.4vw,1.6rem) clamp(1rem,3.2vw,2.5rem);padding:clamp(1.6rem,4vw,3.4rem) clamp(1.4rem,3.5vw,3.2rem);border:1px solid rgba(123,90,20,.75)}
-.banner-kicker{font-family:"Bree Serif",Georgia,serif;font-size:clamp(1.05rem,1.8vw,1.4rem);color:#2B1E06;margin:0 0 .6rem}
-.banner h1{font-family:"Bree Serif",Georgia,serif;font-size:clamp(2.2rem,4.8vw,4rem);line-height:1.05;letter-spacing:-.01em;color:#1E1404;margin:0 0 1rem;max-width:11em}
-.banner-by{font-family:"Bree Serif",Georgia,serif;font-size:clamp(1.5rem,2.8vw,2.2rem);color:#1E1404;margin:0 0 1rem}
-.banner-lead{max-width:30em;color:#33260A;font-size:1.05rem;line-height:1.6;margin:0}
+.banner{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);min-height:clamp(440px,46vw,600px);background:var(--turq-soft)}
+.banner-bg{position:absolute;inset:0;z-index:-1;background:var(--batik) left center/auto 125% repeat-x;mix-blend-mode:multiply;opacity:.9}
+.banner-copy{position:relative;align-self:center;margin:clamp(1rem,2.4vw,1.6rem) 0 clamp(1rem,2.4vw,1.6rem) clamp(1rem,3.2vw,2.5rem);padding:clamp(1.6rem,4vw,3.4rem) clamp(1.4rem,3.5vw,3.2rem);border:1px solid rgba(184,138,46,.85);background:rgba(228,244,242,.72)}
+.banner-kicker{font-family:"Bree Serif",Georgia,serif;font-size:clamp(1.05rem,1.8vw,1.4rem);color:var(--brown);margin:0 0 .6rem}
+.banner h1{font-family:"Bree Serif",Georgia,serif;font-size:clamp(2.2rem,4.8vw,4rem);line-height:1.05;letter-spacing:-.01em;color:var(--ink);margin:0 0 1rem;max-width:11em}
+.banner-by{font-family:"Bree Serif",Georgia,serif;font-size:clamp(1.5rem,2.8vw,2.2rem);color:var(--brown);margin:0 0 1rem}
+.banner-lead{max-width:30em;color:var(--ink);font-size:1.05rem;line-height:1.6;margin:0}
 .banner .actions{align-items:center;gap:1.4rem}
-.banner-link{display:inline-flex;align-items:center;gap:.5rem;font-weight:600;color:#1E1404;text-decoration:none;letter-spacing:.02em}
+.banner-link{display:inline-flex;align-items:center;gap:.5rem;font-weight:600;color:var(--ink);text-decoration:none;letter-spacing:.02em}
 .banner-link svg{width:1.4em;height:1.4em}
 .banner-link:hover{color:var(--turq-deep)}
-.banner-photo{position:relative;min-height:320px}
-.banner-photo img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:50% 22%;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 24%);mask-image:linear-gradient(90deg,transparent 0,#000 24%)}
+.banner-photo{position:relative;min-height:320px;filter:drop-shadow(-5px 0 0 var(--gold))}
+.banner-photo img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:50% 22%;clip-path:ellipse(100% 70% at 100% 50%)}
 
 /* Foto pada baris layanan */
 .svc-row.has-photo{grid-template-columns:200px 1fr auto}
@@ -273,11 +273,12 @@ p{margin:0 0 1.1em}
 
 @media (max-width:980px){.moments-grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:860px){
-  .banner{grid-template-columns:1fr;background:linear-gradient(180deg,#5E440E 0,#8C6A1A 230px,#FBF4E6 340px,#FBF4E6 100%)}
-  .banner-bg{display:none}
+  .banner{grid-template-columns:1fr}
+  .banner-bg{opacity:.55}
   .banner-photo{order:-1;min-height:300px}
-  .banner-photo img{object-position:50% 16%;-webkit-mask-image:linear-gradient(180deg,#000 72%,transparent 100%);mask-image:linear-gradient(180deg,#000 72%,transparent 100%)}
-  .banner-copy{margin:0 1rem 1.5rem;padding:1.6rem 1.3rem;background:rgba(251,244,230,.92)}
+  .banner-photo{filter:none}
+  .banner-photo img{object-position:50% 16%;clip-path:none;-webkit-mask-image:linear-gradient(180deg,#000 72%,transparent 100%);mask-image:linear-gradient(180deg,#000 72%,transparent 100%)}
+  .banner-copy{margin:0 1rem 1.5rem;padding:1.6rem 1.3rem;background:rgba(228,244,242,.92)}
   .page-top::after{opacity:.35}
 }
 @media (max-width:640px){
@@ -286,3 +287,43 @@ p{margin:0 0 1.1em}
   .svc-thumb img{width:100%;height:auto;aspect-ratio:4/3}
 }
 @media (max-width:560px){.moments-grid{grid-template-columns:1fr}}
+
+/* ================= REVISI 2 ================= */
+/* batik di sisi kiri & kanan layar (hanya muncul bila ada ruang di luar konten) */
+body::before,body::after{content:"";position:fixed;top:0;bottom:0;z-index:40;width:var(--side);background:#1a0f06 var(--batik-side) left top/100% auto repeat-y;pointer-events:none}
+body::before{left:0}
+body::after{right:0;transform:scaleX(-1)}
+.site-footer::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--batik) left bottom/auto 100% repeat-x;mix-blend-mode:multiply;opacity:.8;-webkit-mask-image:linear-gradient(90deg,#000,transparent 70%);mask-image:linear-gradient(90deg,#000,transparent 70%)}
+.cta-band{background-color:var(--turq-deep)}
+
+/* produk: seksi terpisah */
+.prod-sec-in{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,5vw,4.5rem);align-items:center}
+.prod-sec.flip .prod-visual{order:-1}
+.prod-sec h2{margin-bottom:.4em}
+.prod-gallery{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.prod-gallery figure{margin:0;padding:6px;background:#fff;border:1px solid rgba(184,138,46,.75)}
+.prod-gallery img{width:100%;height:100%;aspect-ratio:1/1;object-fit:cover}
+.prod-gallery.n3 figure:first-child{grid-row:span 2}
+.prod-gallery.n3 figure:first-child img{aspect-ratio:auto;height:100%}
+.prod-gallery.n1,.prod-gallery.n2{grid-template-columns:1fr}
+.prod-gallery.n2{grid-template-columns:1fr 1fr}
+
+/* testimoni */
+.testi{background:var(--olive);color:#fff;padding-block:clamp(3rem,7vw,5rem)}
+.testi h2{color:#fff;font-size:clamp(1.8rem,3.6vw,2.8rem);margin-bottom:1.6em}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(1rem,2.4vw,2rem);align-items:stretch}
+.testi-card{display:flex;flex-direction:column;gap:1rem}
+.testi-card h3{color:#fff;font-size:1.3rem;min-height:2.6em;margin:0;display:flex;align-items:flex-end}
+.testi-img{height:200px;border:1px solid rgba(255,255,255,.7);padding:.8rem;display:grid;place-items:center;background:rgba(255,255,255,.03)}
+.testi-img img{width:100%;height:auto;max-height:100%;object-fit:contain}
+.testi-quote{margin:0;flex:1;border:1px solid rgba(255,255,255,.7);padding:1.4rem 1.4rem 1.2rem;display:flex;flex-direction:column;font-size:.97rem;line-height:1.6}
+.testi-quote p{margin:0 0 .9rem;color:rgba(255,255,255,.95)}
+.testi-quote .testi-en{font-style:italic;font-weight:600;font-size:.92rem}
+.testi-quote footer{margin-top:auto;display:flex;flex-direction:column;gap:.1rem;color:#fff}
+.testi-quote footer strong{font-size:1.1rem}
+.testi-quote footer span{font-weight:600;opacity:.92}
+@media (max-width:980px){.testi-grid{grid-template-columns:1fr}.testi-card h3{min-height:0}.prod-sec-in{grid-template-columns:1fr}.prod-sec.flip .prod-visual{order:0}}
+
+:root{--side:clamp(0px,calc((100vw - 1120px)/2 - 14px),150px)}
+.banner{padding-inline:var(--side)}
+.banner-bg{inset:0 var(--side)}

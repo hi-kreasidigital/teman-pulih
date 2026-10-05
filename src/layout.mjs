@@ -108,7 +108,6 @@ ${body}
       <ul class="footer-list">
         <li><a class="with-icon" href="${waLink(T.wa.general)}" target="_blank" rel="noopener">${icons.whatsapp}<span>+${site.whatsapp.replace(/^(\d{2})(\d{3})(\d{4})(\d+)$/, '$1 $2-$3-$4')}</span></a></li>
         <li><a class="with-icon" href="${site.instagram}" target="_blank" rel="noopener me">${icons.instagram}<span>${esc(T.footer.instagram)}</span></a></li>
-        <li><a class="with-icon" href="${site.lynkStore}" target="_blank" rel="noopener">${icons.store}<span>${esc(T.footer.store)}</span></a></li>
       </ul>
     </div>
   </div>

@@ -20,6 +20,7 @@ export function buildPages(cms) {
 
   const services = [...cms.services].sort(byOrder);
   const products = [...cms.products].sort(byOrder);
+  const testimonials = [...(cms.testimonials || [])].sort(byOrder);
   const events = [...cms.events].sort((a, b) => a.date.localeCompare(b.date));
   const posts = [...cms.posts].sort((a, b) => b.date.localeCompare(a.date));
   const upcoming = events.filter((e) => e.date >= today);
@@ -32,6 +33,38 @@ export function buildPages(cms) {
   const note = (lang) => (S('disclaimer', lang) ? `<p class="note">${esc(S('disclaimer', lang))}</p>` : '');
   const ctaBand = (lang, title, body, key = 'group') => `<section class="cta-band"><div class="wrap cta-in"><div><h2>${esc(title)}</h2><p>${esc(body)}</p></div>
     <a class="btn btn-gold" href="${wa(lang, key)}" target="_blank" rel="noopener">${icons.whatsapp}<span>${esc(t[lang].chatWA)}</span></a></div></section>`;
+
+
+  // Galeri foto produk (singing bowl / grafir)
+  const prodGallery = (p, lang) => {
+    const g = (p.gallery && p.gallery.length ? p.gallery : p.image ? [{ src: p.image, alt: p.imageAlt }] : []).slice(0, 4);
+    if (!g.length) return panelArt(p.category === 'engraving' ? 'stone' : 'bowl', p.category === 'engraving' ? 'turquoise' : 'gold');
+    return `<div class="prod-gallery n${g.length}">${g.map((x) => `<figure><img src="${imgUrl(x.src)}" alt="${esc(L(x.alt, lang) || L(p.title, lang))}" width="600" height="600" loading="lazy" decoding="async"></figure>`).join('')}</div>`;
+  };
+
+  // Satu seksi per produk (beranda: ringkas, halaman produk: lengkap)
+  const productSection = (p, lang, i, full) => {
+    const T = t[lang];
+    const name = L(p.title, lang);
+    const orderHref = p.orderUrl || wa(lang, 'product', name);
+    const tone = i % 2 ? '' : ' section-mist';
+    return `<section class="section prod-sec${tone}${i % 2 ? ' flip' : ''}" id="${esc(p.slug)}"><div class="wrap prod-sec-in">
+      <div class="prod-copy"><h2>${esc(name)}</h2><p class="lead">${esc(L(p.summary, lang))}</p>
+        ${full ? `<div class="prose">${md(L(p.description, lang))}</div>` : ''}
+        ${full && L(p.price, lang) ? `<p class="price">${esc(T.products.price)}: ${esc(L(p.price, lang))}</p>` : ''}
+        <div class="actions"><a class="btn" href="${orderHref}" target="_blank" rel="noopener">${icons.whatsapp}<span>${esc(T.products.orderWA)}</span></a>
+        ${full ? (p.referenceUrl ? `<a class="btn btn-ghost" href="${esc(p.referenceUrl)}" target="_blank" rel="noopener">${esc(L(p.referenceLabel, lang) || p.referenceUrl)}</a>` : '') : `<a class="btn btn-ghost" href="${u(routes.products[lang])}#${esc(p.slug)}">${esc(T.detail)}</a>`}</div></div>
+      <div class="prod-visual">${prodGallery(p, lang)}</div></div></section>`;
+  };
+
+  // Testimoni (di atas footer)
+  const testiSection = (lang) => !testimonials.length ? '' : `<section class="testi" aria-labelledby="testi-h"><div class="wrap">
+    <h2 id="testi-h">${esc(S('testimonial_title', lang) || t[lang].home.testimonialsTitle)}</h2>
+    <div class="testi-grid">${testimonials.map((x) => `<article class="testi-card">
+      <h3>${esc(L(x.heading, lang))}</h3>
+      ${x.image ? `<div class="testi-img"><img src="${imgUrl(x.image)}" alt="${esc(L(x.heading, lang))}" width="640" height="256" loading="lazy" decoding="async"></div>` : ''}
+      <blockquote class="testi-quote"><p lang="id">${esc(x.quote.id)}</p>${x.quote.en ? `<p class="testi-en" lang="en">${esc(x.quote.en)}</p>` : ''}
+        <footer><strong>${esc(x.name)}</strong>${L(x.role, lang) ? `<span>${esc(L(x.role, lang))}</span>` : ''}</footer></blockquote></article>`).join('')}</div></div></section>`;
 
   // ---------- komponen ----------
   const serviceRow = (s, lang) => `<article class="svc-row${s.image ? ' has-photo' : ''}">
@@ -89,28 +122,26 @@ export function buildPages(cms) {
       const nextEvents = upcoming.slice(0, 3);
       const moments = services.flatMap((sv) => (sv.gallery || []).map((g) => ({ ...g, svc: sv })));
       const latest = posts.filter((p) => hasPost(p, lang)).slice(0, 3);
-      const duo = products.slice(0, 2).map((p, i) => `<a class="prod-tile ${i === 0 ? 'tile-gold' : 'tile-turq'}" href="${u(routes.products[lang])}#${esc(p.slug)}">
-          <span class="tile-icon">${icons[p.category === 'engraving' ? 'stone' : 'bowl']}</span><h3>${esc(L(p.title, lang))}</h3><p>${esc(L(p.summary, lang))}</p></a>`).join('');
       const body = `
 <section class="banner"><div class="banner-bg" aria-hidden="true"></div>
   <div class="banner-copy"><p class="banner-kicker">${esc(S('hero_kicker', lang))}</p><h1>${esc(S('hero_title', lang))}</h1>
     <p class="banner-by">${esc(S('hero_byline', lang))}</p><p class="banner-lead">${esc(S('hero_subtitle', lang))}</p>
     <div class="actions"><a class="btn" href="${wa(lang, 'general')}" target="_blank" rel="noopener">${icons.whatsapp}<span>${esc(T.chatWA)}</span></a>
     <a class="banner-link" href="#portofolio"><span>${esc(T.home.portfolio)}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v15M6 13l6 6 6-6"/></svg></a></div></div>
-  <div class="banner-photo"><img src="${u('/images/hero-fikri.jpg')}" alt="${esc(T.home.heroAlt)}" width="1040" height="1468" fetchpriority="high" decoding="async"></div></section>
+  <div class="banner-photo"><img src="${u('/images/hero-fikri.jpg')}" alt="${esc(T.home.heroAlt)}" width="962" height="1468" fetchpriority="high" decoding="async"></div></section>
 <section class="section"><div class="wrap split"><h2>${esc(S('intro_title', lang))}</h2>
   <div class="prose"><p>${esc(S('intro_body', lang))}</p><h3>${esc(S('audience_title', lang))}</h3><p>${esc(S('audience_body', lang))}</p>
   <p><a class="btn btn-ghost" href="${wa(lang, 'group')}" target="_blank" rel="noopener">${esc(T.askWA)}</a></p></div></div></section>
 <section class="section section-mist"><div class="wrap">${sectionHead(T.home.servicesTitle, T.home.servicesLead)}
   <div class="svc-list">${services.map((s) => serviceRow(s, lang)).join('')}</div></div></section>
-${moments.length ? `<section class="section moments" id="portofolio"><div class="wrap">${sectionHead(T.home.momentsTitle, T.home.momentsLead)}<div class="moments-grid">${moments.map((m) => momentTile(m, lang)).join('')}</div></div></section>` : ''}
 ${nextEvents.length ? `<section class="section"><div class="wrap">${sectionHead(T.home.eventsTitle, '', `<a class="link" href="${u(routes.events[lang])}">${esc(T.seeAllEvents)}</a>`)}
   <div class="event-list">${nextEvents.map((e) => eventRow(e, lang)).join('')}</div></div></section>` : ''}
-${products.length ? `<section class="section section-mist"><div class="wrap">${sectionHead(T.home.productsTitle, T.home.productsLead, `<a class="link" href="${u(routes.products[lang])}">${esc(T.seeProducts)}</a>`)}
-  <div class="prod-duo">${duo}</div></div></section>` : ''}
+${moments.length ? `<section class="section moments" id="portofolio"><div class="wrap">${sectionHead(T.home.momentsTitle, T.home.momentsLead)}<div class="moments-grid">${moments.map((m) => momentTile(m, lang)).join('')}</div></div></section>` : ''}
+${products.map((p, i) => productSection(p, lang, i, false)).join('')}
 ${latest.length ? `<section class="section"><div class="wrap">${sectionHead(T.home.blogTitle, T.home.blogLead, `<a class="link" href="${u(routes.blog[lang])}">${esc(T.seeAllPosts)}</a>`)}
   <div class="post-list">${latest.map((p) => postItem(p, lang)).join('')}</div></div></section>` : ''}
-${ctaBand(lang, T.home.ctaTitle, T.home.ctaBody)}`;
+${ctaBand(lang, T.home.ctaTitle, T.home.ctaBody)}
+${testiSection(lang)}`;
       pages.push({ lang, path: routes.home[lang], alt: both('home'), section: 'home', title: T.home.title, description: T.home.description, body, jsonld: [orgLd(), websiteLd(lang)],
         preload: `<link rel="preload" as="image" href="${u('/images/hero-fikri.jpg')}" fetchpriority="high">` });
     }
@@ -125,7 +156,8 @@ ${ctaBand(lang, T.home.ctaTitle, T.home.ctaBody)}`;
 <section class="section section-mist"><div class="wrap"><h2>${esc(T.about.valuesTitle)}</h2>
   <div class="values">${values.map((v) => `<div class="value"><h3>${esc(v[0].trim())}</h3><p>${esc((v[1] || '').trim())}</p></div>`).join('')}</div></div></section>
 <section class="section-tight"><div class="wrap split"><h2>${esc(S('audience_title', lang))}</h2><div class="prose"><p>${esc(S('audience_body', lang))}</p>${note(lang)}</div></div></section>
-${ctaBand(lang, T.about.ctaTitle, T.about.ctaBody)}`;
+${ctaBand(lang, T.about.ctaTitle, T.about.ctaBody)}
+${testiSection(lang)}`;
       pages.push({ lang, path: routes.about[lang], alt: both('about'), section: 'about', title: T.about.title, description: T.about.description, body,
         jsonld: [breadcrumbLd([{ name: T.breadcrumbHome, path: routes.home[lang] }, { name: T.nav.about, path: routes.about[lang] }])] });
     }
@@ -135,7 +167,8 @@ ${ctaBand(lang, T.about.ctaTitle, T.about.ctaBody)}`;
       const body = `<div class="wrap page-top">${crumbs(lang, [{ name: T.nav.services, path: routes.services[lang] }])}
   <h1>${esc(T.services.h1)}</h1><p class="lead">${esc(T.services.lead)}</p></div>
 <section class="section-tight"><div class="wrap"><div class="svc-list">${services.map((s) => serviceRow(s, lang)).join('')}</div>${note(lang)}</div></section>
-${ctaBand(lang, T.home.ctaTitle, T.home.ctaBody)}`;
+${ctaBand(lang, T.home.ctaTitle, T.home.ctaBody)}
+${testiSection(lang)}`;
       pages.push({ lang, path: routes.services[lang], alt: both('services'), section: 'services', title: T.services.title, description: T.services.description, body,
         jsonld: [breadcrumbLd([{ name: T.breadcrumbHome, path: routes.home[lang] }, { name: T.nav.services, path: routes.services[lang] }]),
           { '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: services.map((s, i) => ({ '@type': 'ListItem', position: i + 1, url: abs(svcPath(lang, s.slug)), name: L(s.title, lang) })) }] });
@@ -179,18 +212,10 @@ ${ctaBand(lang, T.home.ctaTitle, T.home.ctaBody)}`;
 
     // ================= PRODUCTS =================
     {
-      const blocks = products.map((p, i) => {
-        const name = L(p.title, lang);
-        const visual = p.image ? `<img class="prod-img" src="${imgUrl(p.image)}" alt="${esc(L(p.imageAlt, lang) || name)}" width="900" height="900" loading="lazy" decoding="async">`
-          : panelArt(p.category === 'engraving' ? 'stone' : 'bowl', i % 2 === 0 ? 'gold' : 'turquoise');
-        return `<section class="prod-block${i % 2 ? ' flip' : ''}" id="${esc(p.slug)}"><div class="prod-visual">${visual}</div>
-          <div class="prod-copy"><h2>${esc(name)}</h2><p class="lead">${esc(L(p.summary, lang))}</p><div class="prose">${md(L(p.description, lang))}</div>
-          ${L(p.price, lang) ? `<p class="price">${esc(T.products.price)}: ${esc(L(p.price, lang))}</p>` : ''}
-          <div class="actions"><a class="btn" href="${p.orderUrl || wa(lang, 'product', name)}" target="_blank" rel="noopener">${icons.whatsapp}<span>${esc(T.products.orderWA)}</span></a>
-          ${p.referenceUrl ? `<a class="btn btn-ghost" href="${esc(p.referenceUrl)}" target="_blank" rel="noopener">${esc(L(p.referenceLabel, lang) || p.referenceUrl)}</a>` : ''}</div></div></section>`;
-      }).join('');
+      const blocks = products.map((p, i) => productSection(p, lang, i, true)).join('');
       const body = `<div class="wrap page-top">${crumbs(lang, [{ name: T.nav.products, path: routes.products[lang] }])}
-  <h1>${esc(T.products.h1)}</h1><p class="lead">${esc(T.products.lead)}</p></div><div class="wrap">${blocks}</div>`;
+  <h1>${esc(T.products.h1)}</h1><p class="lead">${esc(T.products.lead)}</p></div>${blocks}
+${testiSection(lang)}`;
       pages.push({ lang, path: routes.products[lang], alt: both('products'), section: 'products', title: T.products.title, description: T.products.description, body,
         jsonld: [breadcrumbLd([{ name: T.breadcrumbHome, path: routes.home[lang] }, { name: T.nav.products, path: routes.products[lang] }])] });
     }

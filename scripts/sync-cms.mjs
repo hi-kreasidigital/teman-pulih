@@ -22,7 +22,8 @@ const TABLES = {
   services: process.env.AIRTABLE_TABLE_SERVICES || 'Services',
   events: process.env.AIRTABLE_TABLE_EVENTS || 'Events',
   products: process.env.AIRTABLE_TABLE_PRODUCTS || 'Products',
-  posts: process.env.AIRTABLE_TABLE_POSTS || 'Posts'
+  posts: process.env.AIRTABLE_TABLE_POSTS || 'Posts',
+  testimonials: process.env.AIRTABLE_TABLE_TESTIMONIALS || 'Testimonials'
 };
 
 if (!TOKEN || !BASE) {
@@ -76,12 +77,13 @@ async function localImages(att) {
 const localImage = async (att) => (await localImages(Array.isArray(att) ? att.slice(0, 1) : att))[0] || '';
 
 try {
-  const [rs, rv, re, rp, rb] = await Promise.all([
+  const [rs, rv, re, rp, rb, rt] = await Promise.all([
     fetchAll(TABLES.settings, { optional: true }),
     fetchAll(TABLES.services),
     fetchAll(TABLES.events),
     fetchAll(TABLES.products),
-    fetchAll(TABLES.posts)
+    fetchAll(TABLES.posts),
+    fetchAll(TABLES.testimonials, { optional: true })
   ]);
 
   // Site Settings: Key | ID | EN  (menimpa nilai bawaan)
@@ -127,8 +129,15 @@ try {
   const products = [];
   for (const r of rb.filter((r) => isPublished(r.fields))) {
     const f = r.fields; const title = bi(f, 'Title');
+    const pslug = txt(f.Slug) || slugify(title.id || title.en);
+    const pfb = seed.products.find((x) => x.slug === pslug) || {};
+    const pgal = await localImages(f.Gallery);
+    const pgallery = pgal.length
+      ? pgal.map((src, i) => ({ src, alt: { id: `${title.id} ${i + 1}`, en: `${title.en || title.id} ${i + 1}` }, caption: { id: title.id, en: title.en || title.id } }))
+      : pfb.gallery || [];
     products.push({
-      slug: txt(f.Slug) || slugify(title.id || title.en), order: num(f.Order),
+      gallery: pgallery,
+      slug: pslug, order: num(f.Order),
       category: txt(f.Category) || 'singing-bowl',
       title, summary: bi(f, 'Summary'), description: bi(f, 'Description'),
       price: bi(f, 'Price'), orderUrl: txt(f['Order URL']),
@@ -149,7 +158,20 @@ try {
     });
   }
 
-  fs.writeFileSync(outFile, JSON.stringify({ source: 'airtable', settings, services, events, products, posts }, null, 2));
+  // Testimoni: bila tabel belum ada / kosong, pakai testimoni bawaan
+  const testimonials = [];
+  for (const r of rt.filter((r) => isPublished(r.fields))) {
+    const f = r.fields; const heading = bi(f, 'Heading');
+    const slug = txt(f.Slug) || slugify(heading.id || heading.en || txt(f.Name));
+    const fb = (seed.testimonials || []).find((x) => x.slug === slug) || {};
+    testimonials.push({
+      slug, order: num(f.Order), heading, quote: bi(f, 'Quote'), name: txt(f.Name), role: bi(f, 'Role'),
+      image: (await localImage(f.Image)) || fb.image || ''
+    });
+  }
+  const finalTestimonials = testimonials.length ? testimonials : seed.testimonials || [];
+
+  fs.writeFileSync(outFile, JSON.stringify({ source: 'airtable', settings, services, events, products, posts, testimonials: finalTestimonials }, null, 2));
   console.log(`[cms] Airtable OK: ${services.length} layanan, ${events.length} acara, ${products.length} produk, ${posts.length} artikel.`);
 } catch (err) {
   console.error(`[cms] ERROR: ${err.message}`);

@@ -48,6 +48,10 @@
     "hero_byline": {
       "id": "by Fikri Arya",
       "en": "by Fikri Arya"
+    },
+    "testimonial_title": {
+      "id": "Instrumen, Sumber Bunyi & Testimoni",
+      "en": "Instruments, Sound Sources & Testimonials"
     }
   },
   "services": [
@@ -369,7 +373,53 @@
       "referenceLabel": {
         "id": "Lihat koleksi singing bowl",
         "en": "See the singing bowl collection"
-      }
+      },
+      "gallery": [
+        {
+          "src": "/images/produk/singing-bowl-1.jpg",
+          "alt": {
+            "id": "Singing bowl Nusantara 1",
+            "en": "Nusantara singing bowl 1"
+          },
+          "caption": {
+            "id": "Singing bowl Nusantara",
+            "en": "Nusantara singing bowl"
+          }
+        },
+        {
+          "src": "/images/produk/singing-bowl-2.jpg",
+          "alt": {
+            "id": "Singing bowl Nusantara 2",
+            "en": "Nusantara singing bowl 2"
+          },
+          "caption": {
+            "id": "Singing bowl Nusantara",
+            "en": "Nusantara singing bowl"
+          }
+        },
+        {
+          "src": "/images/produk/singing-bowl-3.jpg",
+          "alt": {
+            "id": "Singing bowl Nusantara 3",
+            "en": "Nusantara singing bowl 3"
+          },
+          "caption": {
+            "id": "Singing bowl Nusantara",
+            "en": "Nusantara singing bowl"
+          }
+        },
+        {
+          "src": "/images/produk/singing-bowl-4.jpg",
+          "alt": {
+            "id": "Singing bowl Nusantara 4",
+            "en": "Nusantara singing bowl 4"
+          },
+          "caption": {
+            "id": "Singing bowl Nusantara",
+            "en": "Nusantara singing bowl"
+          }
+        }
+      ]
     },
     {
       "slug": "jasa-grafir-mallet-singing-bowl",
@@ -386,7 +436,42 @@
       "description": {
         "id": "Setiap singing bowl punya suara dan karakter sendiri. Dengan grafir, Anda bisa menambahkan nama, simbol, mantra, aksara, atau motif yang bermakna sehingga alat Anda menjadi benar-benar personal.\n\n**Cocok untuk**\n\n- Hadiah yang bermakna untuk orang terdekat\n- Identitas komunitas atau studio\n- Penanda perjalanan pribadi\n\n**Cara memesan**\n\n- Kirim ide teks atau desain melalui WhatsApp\n- Kami bantu menyesuaikan ukuran dan penempatan grafir\n- Konfirmasi desain sebelum pengerjaan dimulai",
         "en": "Every singing bowl has its own voice and character. With engraving you can add a name, symbol, mantra, script, or motif that carries meaning, so your instrument becomes truly personal.\n\n**A good fit for**\n\n- Meaningful gifts for people close to you\n- A community or studio identity\n- Marking a personal journey\n\n**How to order**\n\n- Send your text or design idea via WhatsApp\n- We help adjust the size and placement of the engraving\n- Confirm the design before work begins"
-      }
+      },
+      "gallery": [
+        {
+          "src": "/images/produk/grafir-1.jpg",
+          "alt": {
+            "id": "Contoh grafir singing bowl 1",
+            "en": "Singing bowl engraving example 1"
+          },
+          "caption": {
+            "id": "Contoh grafir singing bowl",
+            "en": "Singing bowl engraving example"
+          }
+        },
+        {
+          "src": "/images/produk/grafir-2.jpg",
+          "alt": {
+            "id": "Contoh grafir singing bowl 2",
+            "en": "Singing bowl engraving example 2"
+          },
+          "caption": {
+            "id": "Contoh grafir singing bowl",
+            "en": "Singing bowl engraving example"
+          }
+        },
+        {
+          "src": "/images/produk/grafir-3.jpg",
+          "alt": {
+            "id": "Contoh grafir singing bowl 3",
+            "en": "Singing bowl engraving example 3"
+          },
+          "caption": {
+            "id": "Contoh grafir singing bowl",
+            "en": "Singing bowl engraving example"
+          }
+        }
+      ]
     }
   ],
   "posts": [
@@ -467,6 +552,62 @@
         "en": "Intuitive counseling is a conversational companionship that makes room for what the body and heart feel, not only what the head thinks.\n\n## How a session unfolds\n\nWe begin by settling the breath. Then you speak at your own pace. The companion helps with questions and reflection, and by the end you shape one or two small steps.\n\n## Signs you might need this space\n\n- Struggling to decide even after a lot of thinking\n- Feeling emotionally tired without knowing why\n- Wanting company rather than advice\n- Wanting to know your needs and limits better\n\n## Good to know\n\nIntuitive counseling is complementary support. It does not replace diagnosis or therapy from a clinical psychologist or psychiatrist. If you are in crisis or have thoughts of hurting yourself, contact emergency services or a professional right away.\n\nSessions are online, so you can join from a place where you feel comfortable."
       },
       "slugEn": "what-is-intuitive-counseling"
+    }
+  ],
+  "testimonials": [
+    {
+      "slug": "hanacaraka-singing-bowl",
+      "order": 1,
+      "heading": {
+        "id": "Hanacaraka Singing Bowl",
+        "en": "Hanacaraka Singing Bowl"
+      },
+      "image": "/images/testimoni/t1.jpg",
+      "quote": {
+        "id": "Sesi dengan Fikri Arya menyadarkanku tentang pentingnya kembali ke akar yaitu ke dalam diri dan tubuh. Selain kelegaan, aku mendapatkan pelepasan emosi mendalam dan tidur yang berkualitas setelah sesi.",
+        "en": "This session with Fikri Arya reminded me of the importance of returning to my roots, to my self and to my body. Beyond a sense of relief, I also experienced deep emotional release and restorative sleep."
+      },
+      "name": "Fitriana Imelda",
+      "role": {
+        "id": "Medical Laboratory Technologist",
+        "en": "Medical Laboratory Technologist"
+      }
+    },
+    {
+      "slug": "rain-stick-bamboo",
+      "order": 2,
+      "heading": {
+        "id": "Rain stick & Bamboo Instruments",
+        "en": "Rain stick & Bamboo Instruments"
+      },
+      "image": "/images/testimoni/t2.jpg",
+      "quote": {
+        "id": "Sesi ini membantuku pelan-pelan kembali mendengarkan diri sendiri. Aku merasa ditemani tanpa dihakimi, dan diberi ruang untuk memahami apa yang sedang terjadi di dalam tubuh dan pikiranku. Setelah sesi, ada rasa lebih ringan dan tenang.",
+        "en": "This session gently helped me listen to my self again. I felt supported without judgement and given space to understand what was happening in my body and mind. After the session, there was a sense of lightness and calm."
+      },
+      "name": "Selina Heryati & Ekki Rahman",
+      "role": {
+        "id": "CEO Hanacaraka Massage and Herbs",
+        "en": "CEO Hanacaraka Massage and Herbs"
+      }
+    },
+    {
+      "slug": "traditional-nature-modern",
+      "order": 3,
+      "heading": {
+        "id": "Instrumen Tradisional, Suara Alam, & Peralatan Modern",
+        "en": "Traditional Instruments, Nature Sounds, & Modern Equipments"
+      },
+      "image": "/images/testimoni/t3.jpg",
+      "quote": {
+        "id": "Mengikuti sesi healing group ini terasa seperti diberi izin untuk benar-benar beristirahat. Bunyi dan keheningan menciptakan rasa aman dan meski dilakukan bersama, pengalamannya terasa sangat personal. Aku pulang dengan napas lebih lega dan tubuh yang lebih rileks.",
+        "en": "Joining this group sound healing session felt like being given permission to truly rest. The sounds and silence created a sense of safety, and even though it was a shared space, the experience felt deeply personal. I left with easier breathing and a more relaxed body."
+      },
+      "name": "Tommy Cash",
+      "role": {
+        "id": "SMOT Project & Crafts, Hebel Curving and Arts",
+        "en": "SMOT Project & Crafts, Hebel Curving and Arts"
+      }
     }
   ]
 }

@@ -49,3 +49,8 @@ Jika token/nama kolom salah, build sengaja berhenti dan situs yang sedang live t
 
 ## Banner beranda
 Kunci **Site Settings** `hero_kicker`, `hero_title`, `hero_byline`, `hero_subtitle` mengatur teks banner. Foto potret banner ada di `public/images/hero-fikri.jpg`; logo di `public/images/logo-*.png`.
+
+## Testimoni & foto produk (revisi 2)
+- Tabel baru **Testimonials**: Slug, Published, Order, Heading ID/EN, Image (attachment, opsional), Quote ID/EN, Name, Role ID/EN. Bila tabel kosong/tidak ada, situs memakai testimoni bawaan. Judul seksi diatur lewat Site Settings `testimonial_title`.
+- Tabel **Products** punya field baru **Gallery** (attachment, maks. 4 foto tampil). Kosong = foto bawaan di `public/images/produk/`. Singing bowl dan jasa grafir tampil sebagai dua seksi terpisah di beranda dan halaman produk.
+- Token Airtable perlu akses baca ke tabel Testimonials.
