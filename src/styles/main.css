@@ -349,3 +349,51 @@ body::after{right:0;transform:scaleX(-1)}
 .shop-card .btn{margin-top:auto;width:100%}
 @media (max-width:1000px){.shop-grid{grid-template-columns:repeat(2,1fr)}}
 @media (max-width:480px){.shop-grid{gap:.7rem}.shop-card h3{font-size:1rem}}
+
+/* ================= REVISI 6: optimasi HP + batik sisi di layar kecil ================= */
+:root{--side:clamp(14px,calc((100vw - 1120px)/2 - 14px),150px)}
+.wrap{width:min(1120px,100% - 2*var(--side) - 1.5rem)}
+body::before,body::after{background-size:max(var(--side),46px) auto}
+.banner{padding-inline:0}
+@media (min-width:981px){.banner{padding-inline:var(--side)}}
+@media (max-width:980px){
+  .banner-bg{inset:0}
+  .banner-copy{padding-inline:calc(var(--side) + .8rem)!important;margin:0!important}
+  .banner-photo{padding:1.1rem 0 .2rem}
+  .banner-photo img{width:min(200px,52vw)!important;border-width:4px;box-shadow:0 0 0 6px var(--turq-soft),0 0 0 7px rgba(184,138,46,.55)}
+}
+@media (max-width:640px){
+  body{font-size:1rem}
+  .header-in{min-height:60px}
+  .logo-mark{width:34px;height:34px}
+  .brand{font-size:1.2rem}
+  .banner h1{font-size:clamp(1.9rem,8.4vw,2.4rem);margin-bottom:.6rem}
+  .banner-kicker{font-size:1rem;margin-bottom:.4rem}
+  .banner-by{font-size:1.3rem;margin-bottom:.6rem}
+  .banner-lead{font-size:.98rem;line-height:1.55}
+  .banner .actions{margin-top:1.1rem;flex-wrap:wrap;gap:.8rem 1.2rem}
+  .banner-copy{padding-bottom:1.6rem!important}
+  .section{padding-block:2.6rem}
+  .section-tight{padding-block:2rem}
+  h2{font-size:clamp(1.55rem,6.6vw,1.9rem)}
+  .sec-head{flex-direction:column;align-items:flex-start;gap:.4rem}
+  .svc-row.has-photo{grid-template-columns:96px 1fr;gap:.9rem;align-items:start}
+  .svc-row.has-photo .link{grid-column:2}
+  .svc-thumb img{height:auto}
+  .event-row{grid-template-columns:auto 1fr;gap:.9rem}
+  .event-row .btn{grid-column:1/-1;width:100%}
+  .moments-grid{grid-template-columns:repeat(2,1fr);gap:.8rem}
+  .moment-cap{font-size:.95rem}
+  .prod-gallery{gap:.5rem}
+  .testi h2{margin-bottom:1rem}
+  .cta-in{flex-direction:column;align-items:flex-start;gap:1.2rem}
+  .cta-in .btn{width:100%}
+  .footer-grid{gap:1.6rem}
+  .page-top{padding-top:1.2rem}
+  h1{font-size:clamp(2rem,9vw,2.6rem)}
+  .wa-float{padding:.7rem;right:.8rem;bottom:.8rem}
+  .wa-float span{display:none}
+}
+.shop-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:1000px){.shop-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.shop-card{padding:.55rem .55rem .8rem}.shop-card .btn{padding:.65rem .4rem;font-size:.88rem;white-space:nowrap;gap:.4rem}.shop-card .btn svg{width:1.1em;height:1.1em}}
