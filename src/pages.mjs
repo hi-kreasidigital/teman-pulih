@@ -61,11 +61,8 @@ export function buildPages(cms) {
   // Testimoni (di atas footer)
   const testiSection = (lang) => !testimonials.length ? '' : `<section class="testi" aria-labelledby="testi-h"><div class="wrap">
     <h2 id="testi-h">${esc(S('testimonial_title', lang) || t[lang].home.testimonialsTitle)}</h2>
-    <div class="testi-grid">${testimonials.map((x) => `<article class="testi-card">
-      <h3>${esc(L(x.heading, lang))}</h3>
-      ${x.image ? `<div class="testi-img"><img src="${imgUrl(x.image)}" alt="${esc(L(x.heading, lang))}" width="640" height="256" loading="lazy" decoding="async"></div>` : ''}
-      <blockquote class="testi-quote"><p lang="id">${esc(x.quote.id)}</p>${x.quote.en ? `<p class="testi-en" lang="en">${esc(x.quote.en)}</p>` : ''}
-        <footer><strong>${esc(x.name)}</strong>${L(x.role, lang) ? `<span>${esc(L(x.role, lang))}</span>` : ''}</footer></blockquote></article>`).join('')}</div></div></section>`;
+    <div class="testi-grid">${testimonials.map((x) => `<figure class="testi-card"><blockquote class="testi-quote"><p>${esc(L(x.quote, lang))}</p></blockquote>
+      <figcaption><strong>${esc(x.name)}</strong>${L(x.role, lang) ? `<span>${esc(L(x.role, lang))}</span>` : ''}</figcaption></figure>`).join('')}</div></div></section>`;
 
   // ---------- komponen ----------
   const serviceRow = (s, lang) => `<article class="svc-row${s.image ? ' has-photo' : ''}">
@@ -99,7 +96,8 @@ export function buildPages(cms) {
     <time datetime="${esc(p.date)}">${fmtDate(p.date, lang)}</time>
     <h3><a href="${u(postPath(lang, p))}">${esc(p.title[lang])}</a></h3>
     <p>${esc(L(p.excerpt, lang) || truncate(stripMd(p.body[lang]), 150))}</p>
-    ${tagsOf(p, lang).length ? `<ul class="tags">${tagsOf(p, lang).map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}</article>`;
+    ${tagsOf(p, lang).length ? `<ul class="tags">${tagsOf(p, lang).map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
+    <a class="post-more" href="${u(postPath(lang, p))}">${esc(t[lang].readMore || (lang === 'id' ? 'Baca artikel' : 'Read article'))} <span aria-hidden="true">&rarr;</span></a></article>`;
 
   const eventLd = (ev, lang) => {
     const mode = { Online: 'OnlineEventAttendanceMode', Offline: 'OfflineEventAttendanceMode', Hybrid: 'MixedEventAttendanceMode' }[ev.mode] || 'OnlineEventAttendanceMode';
@@ -139,7 +137,7 @@ ${nextEvents.length ? `<section class="section"><div class="wrap">${sectionHead(
   <div class="event-list">${nextEvents.map((e) => eventRow(e, lang)).join('')}</div></div></section>` : ''}
 ${moments.length ? `<section class="section moments" id="portofolio"><div class="wrap">${sectionHead(T.home.momentsTitle, T.home.momentsLead)}<div class="moments-grid">${moments.map((m) => momentTile(m, lang)).join('')}</div></div></section>` : ''}
 ${products.map((p, i) => productSection(p, lang, i, false)).join('')}
-${latest.length ? `<section class="section"><div class="wrap">${sectionHead(T.home.blogTitle, T.home.blogLead, `<a class="link" href="${u(routes.blog[lang])}">${esc(T.seeAllPosts)}</a>`)}
+${latest.length ? `<section class="section blog-home"><div class="wrap"><header class="blog-head"><div><h2>${esc(T.home.blogTitle)}</h2><p class="lead">${esc(T.home.blogLead)}</p></div><a class="btn btn-ghost" href="${u(routes.blog[lang])}">${esc(T.seeAllPosts)}</a></header>
   <div class="post-list">${latest.map((p) => postItem(p, lang)).join('')}</div></div></section>` : ''}
 ${ctaBand(lang, T.home.ctaTitle, T.home.ctaBody)}
 ${testiSection(lang)}`;

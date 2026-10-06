@@ -112,7 +112,7 @@ ${body}
       </ul>
     </div>
   </div>
-  <div class="wrap footer-base"><p>&copy; ${new Date().getFullYear()} ${esc(site.name)}. ${esc(T.footer.rights)}</p></div>
+  <div class="wrap footer-base"><p>&copy; ${new Date().getFullYear()} ${esc(site.name)}. ${esc(T.footer.rights)}</p><p class="credit"><a href="https://hi-kreasidigital.github.io/kreasi-digital-site/" target="_blank" rel="noopener">${esc(T.footer.credit)}</a></p></div>
 </footer>
 <a class="wa-float" href="${waLink(T.wa.general)}" target="_blank" rel="noopener" aria-label="${esc(T.chatWA)}">${icons.whatsapp}<span>${esc(T.waShort)}</span></a>
 <script>

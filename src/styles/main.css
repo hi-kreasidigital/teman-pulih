@@ -178,7 +178,7 @@ p{margin:0 0 1.1em}
 .with-icon{display:inline-flex;align-items:center;gap:.55rem}
 .with-icon svg{width:1.2em;height:1.2em;color:var(--turq-deep)}
 .footer-base{padding-block:2rem 5.5rem;font-size:.9rem;color:rgba(29,43,42,.7)}
-.footer-base p{margin:0;border-top:1px solid rgba(29,43,42,.1);padding-top:1.2rem}
+.footer-base{display:flex;justify-content:space-between;align-items:center;gap:.6rem 1.5rem;flex-wrap:wrap;border-top:1px solid rgba(29,43,42,.1);margin-inline:auto}.footer-base p{margin:0;padding-top:1.2rem}.footer-base .credit{margin-left:auto;text-align:right}.footer-base .credit a{color:var(--turq-deep);font-weight:600;text-decoration:none;border-bottom:1px solid var(--gold)}.footer-base .credit a:hover{color:var(--ink)}@media (max-width:640px){.footer-base{flex-direction:column;align-items:flex-start}.footer-base .credit{margin-left:0;text-align:left;padding-top:0}.footer-base p:first-child{padding-bottom:0}}
 
 /* ---------- tombol WhatsApp mengambang ---------- */
 .wa-float{position:fixed;right:1.1rem;bottom:1.1rem;z-index:60;display:inline-flex;align-items:center;gap:.55rem;padding:.8rem 1.2rem;border-radius:999px;background:var(--turq-deep);color:#fff;font-weight:600;text-decoration:none;box-shadow:0 8px 24px rgba(11,95,92,.35)}
@@ -441,3 +441,24 @@ body::before,body::after{width:var(--bside);mix-blend-mode:multiply;opacity:1}
   .btn{padding:.8rem 1.25rem}
   .footer-grid{gap:1.6rem}
 }
+
+/* REVISI 7: testimoni, pemisah seksi, kartu blog */
+.testi-grid{align-items:stretch}
+.testi-card{margin:0;display:flex;flex-direction:column;border:1px solid rgba(255,255,255,.5);padding:1.6rem 1.5rem 1.4rem;gap:1.1rem}
+.testi-quote{border:0;padding:0;margin:0;flex:1;font-size:1rem;line-height:1.7}
+.testi-quote p{margin:0}
+.testi-quote p::before{content:"\201C";display:block;font:3rem/1 'Bree Serif',serif;color:var(--gold);margin-bottom:.2rem}
+.testi-card figcaption{display:flex;flex-direction:column;gap:.1rem;border-top:1px solid rgba(255,255,255,.3);padding-top:.9rem}
+.testi-card figcaption strong{font-size:1.1rem}
+.testi-card figcaption span{opacity:.9;font-size:.95rem}
+.moments{background:var(--turq-soft)}
+.moments::before{opacity:.35}
+.blog-home{position:relative;background:var(--turq-soft)}
+.blog-head{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem 2rem;flex-wrap:wrap;margin-bottom:clamp(1.6rem,3vw,2.6rem)}
+.blog-head h2{margin:0 0 .3em}.blog-head .lead{margin:0;max-width:46ch}
+.blog-home .post-item,.post-list-lg .post-item{background:#fff;border:1px solid rgba(29,43,42,.08);border-top:3px solid var(--gold);border-radius:14px;padding:1.4rem 1.4rem 1.3rem;box-shadow:0 6px 22px rgba(29,43,42,.07);display:flex;flex-direction:column}
+.blog-home .post-item p,.post-list-lg .post-item p{flex:1}
+.post-more{margin-top:auto;font-weight:600;color:var(--turq-deep);text-decoration:none}
+.post-more:hover{color:var(--ink)}
+.blog-home .post-list>.post-item:only-child{max-width:520px}
+@media (max-width:640px){.blog-head .btn{width:100%;justify-content:center}}
